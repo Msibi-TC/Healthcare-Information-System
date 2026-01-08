@@ -1,0 +1,31 @@
+# FastAPI and server
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Database
+sqlalchemy
+psycopg[binary]
+alembic
+
+# Authentication & Security
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+python-dotenv
+pydantic
+pydantic-settings
+
+# Email
+fastapi-mail
+email-validator
+
+# Testing
+pytest
+pytest-asyncio
+httpx
+
+# Development
+black
+flake8
+mypy
