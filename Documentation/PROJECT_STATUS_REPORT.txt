@@ -1,0 +1,913 @@
+HEALTHCARE INFORMATION SYSTEM - PROJECT HANDOFF REPORT
+======================================================
+
+Audit date: 14 August 2026
+Repository: Healthcare-Information-System
+Branch audited: main
+HEAD audited: e0fbd35 (Finished the patient model.)
+
+IMPORTANT INTERPRETATION NOTE
+-----------------------------
+
+The files in Documentation/ are requirements and design documents. They are not
+proof that any feature has been implemented. This report distinguishes executable
+repository contents from proposed functionality throughout.
+
+
+EXECUTIVE SUMMARY
+-----------------
+
+The repository is at a very early backend-scaffolding stage and does not currently
+contain a runnable application.
+
+Confirmed implementation consists of:
+
+* A Python dependency list.
+* Application settings.
+* A synchronous SQLAlchemy engine/session factory.
+* JWT access-token and bcrypt password utilities.
+* Four partial SQLAlchemy model declarations: User, Patient, Hospitals, and
+  Department.
+
+The repository currently has:
+
+* No FastAPI application instance.
+* No implemented API endpoints.
+* No frontend.
+* No migrations or database scripts.
+* No tests.
+* No Docker configuration.
+* No README.
+* No usable environment template.
+* No complete authentication flow.
+* No complete end-to-end feature.
+
+The two original files under Documentation/ describe requirements and intended
+design only. At the time of the audit, the Documentation/ directory was untracked
+by Git.
+
+
+PROJECT PURPOSE
+---------------
+
+According to the design documents, the intended project is a multi-hospital
+healthcare management platform for South African healthcare facilities.
+
+The proposed scope includes:
+
+* Users and role-based access.
+* Patient profiles and medical histories.
+* Doctors and specializations.
+* Appointments and consultations.
+* Prescriptions.
+* Surgery scheduling, consent, teams, and reports.
+* Hospital and department administration.
+* Medical records.
+* Reporting, notifications, billing, and later enterprise features.
+
+Confirmed reality: only a small portion of the initial backend data-model scaffold
+exists.
+
+
+PROJECT STRUCTURE
+-----------------
+
+Healthcare-Information-System/
+|-- .git/
+|-- .vscode/
+|   `-- settings.json
+|-- backend/
+|   |-- .env.example
+|   |-- requirements.txt
+|   `-- app/
+|       |-- __init__.py
+|       |-- main.py
+|       |-- core/
+|       |   |-- config.py
+|       |   |-- database.py
+|       |   `-- security.py
+|       |-- models/
+|       |   |-- admin.py
+|       |   |-- appointment.py
+|       |   |-- consultations.py
+|       |   |-- departments.py
+|       |   |-- doctor.py
+|       |   |-- hospitals.py
+|       |   |-- medical_conditions.py
+|       |   |-- patient.py
+|       |   |-- surgeries.py
+|       |   |-- surgery.py
+|       |   `-- user.py
+|       `-- schemas/
+|           |-- patient.py
+|           `-- user.py
+`-- Documentation/
+    |-- phase1_proposal.txt
+    |-- Technical docs.txt
+    `-- PROJECT_HANDOFF_REPORT.txt
+
+Absent despite being described in the design documentation:
+
+* frontend/
+* api/
+* crud/
+* utils/
+* alembic/
+* tests/
+* README.md
+* .gitignore
+* Dockerfile or Docker Compose configuration
+* SQL scripts
+* Seed scripts
+* Continuous integration configuration
+
+
+TECHNOLOGY STACK
+----------------
+
+Confirmed by executable code or dependencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+backend/requirements.txt lists:
+
+* FastAPI
+* Uvicorn with standard extras
+* python-multipart
+* SQLAlchemy
+* PostgreSQL driver: psycopg[binary]
+* Alembic
+* Pydantic
+* pydantic-settings
+* python-jose[cryptography]
+* Passlib with bcrypt
+* bcrypt
+* python-dotenv
+* fastapi-mail
+* email-validator
+* pytest
+* pytest-asyncio
+* HTTPX
+* Black
+* Flake8
+* mypy
+
+Every dependency is unpinned. The exact installed or intended versions cannot be
+determined from the repository.
+
+Intended by design documents, but not implemented
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The proposal calls for:
+
+* Python 3.9+
+* FastAPI 0.109+
+* SQLAlchemy 2.0+
+* PostgreSQL 14+
+* React 18.2+
+* TypeScript 4.9+
+* Tailwind CSS 3+
+* TanStack Query
+* Axios
+* React Router 6+
+* Docker and Docker Compose
+* Nginx and possibly Gunicorn
+
+These are requirements/design choices only. No frontend or container configuration
+proves their use.
+
+
+ARCHITECTURE
+------------
+
+Intended architecture
+~~~~~~~~~~~~~~~~~~~~~
+
+The documents describe a conventional three-tier system:
+
+React/TypeScript frontend
+          |
+          | HTTP/JWT
+          v
+FastAPI REST backend
+          |
+          | SQLAlchemy
+          v
+PostgreSQL database
+
+The proposed backend structure separates API route handlers, authentication
+dependencies, Pydantic schemas, CRUD/data-access functions, SQLAlchemy models,
+configuration/security, and Alembic migrations.
+
+Actual architecture
+~~~~~~~~~~~~~~~~~~~
+
+Only the beginnings of the backend persistence and utility layers exist:
+
+* Configuration
+  - Database connection settings
+  - JWT settings
+  - CORS values
+  - Email placeholders
+* Core utilities
+  - SQLAlchemy engine/session generator
+  - JWT access-token creation
+  - bcrypt hash/verification
+* Partial ORM models
+  - User
+  - Patient
+  - Hospitals
+  - Department
+
+There is no application, service, business-logic, CRUD, or API layer connecting
+these pieces.
+
+
+IMPORTANT FILES
+---------------
+
+* backend/app/core/config.py defines application, security, database, CORS,
+  initial-administrator, and email settings.
+* backend/app/core/database.py creates the SQLAlchemy engine, session factory,
+  declarative base, and get_db() generator.
+* backend/app/core/security.py implements access-token creation and password
+  hashing/verification.
+* backend/app/models/user.py defines user roles and the partial user table.
+* backend/app/models/patient.py defines the partial patient table.
+* backend/app/models/hospitals.py defines a partial hospital table.
+* backend/app/models/departments.py defines a partial department table.
+* backend/app/main.py is empty.
+* Documentation/Technical docs.txt is an intended architecture/schema/API plan.
+* Documentation/phase1_proposal.txt is the broader requirements and project
+  proposal.
+
+
+DATABASE STRUCTURE AND ACCESS
+-----------------------------
+
+Database access
+~~~~~~~~~~~~~~~
+
+The implementation uses synchronous SQLAlchemy:
+
+* create_engine() builds a PostgreSQL engine.
+* SessionLocal is intended to provide request-scoped sessions.
+* get_db() yields and then closes a session.
+* The database URL is constructed from five settings fields.
+
+There are no repositories, CRUD modules, queries, transaction workflows, migration
+scripts, or calls to Base.metadata.create_all().
+
+Actually declared table: Users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fields:
+
+* id
+* email
+* password_hash
+* role
+* first_name
+* last_name
+* phone
+* date_of_birth
+* gender
+* address
+* national_id
+* is_active
+* created_at
+* updated_at
+
+Roles declared in UserRole:
+
+* patient
+* doctor
+* nurse
+* admin
+* super_admin
+
+Actually declared table: patients
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fields:
+
+* id
+* user_id
+* blood_group
+* height
+* weight
+* emergency_contact_name
+* emergency_contact_phone
+* allergies
+* created_at
+* updated_at
+
+Actually declared table: hospitals
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fields:
+
+* id
+* name
+* address
+* phone
+* email
+* license_number
+* established_date
+* total_beds
+* available_beds
+* created_at
+* updated_at
+
+Actually declared table: departments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fields:
+
+* id
+* hospital_id
+* name
+* description
+* head_doctor_id
+* created_at
+
+Designed but not implemented tables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The technical design additionally proposes:
+
+* doctors
+* specializations
+* condition_categories
+* medical_conditions
+* appointments
+* appointment_conditions
+* consultations
+* prescriptions
+* surgeries
+* surgery_team
+* surgery_consent_forms
+* surgery_reports
+* medical_records
+
+Those tables do not have implemented model classes.
+
+Database consistency defects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The current metadata cannot be considered usable:
+
+* User.__tablename__ is "Users" with an uppercase U, but Patient.user_id refers
+  to "users.id" in lowercase.
+* The implemented class is Hospitals, while relationships refer to "Hospital".
+* Department refers to a nonexistent doctors table.
+* Several relationships point to nonexistent model classes.
+* There are no migrations capable of creating or evolving the schema.
+
+
+BACKEND STRUCTURE
+-----------------
+
+Configuration
+~~~~~~~~~~~~~
+
+Defaults include:
+
+* API prefix: /api/v1
+* Project name: Hospital Management System
+* PostgreSQL server: localhost:5432
+* Database: hospital_db
+* Database username/password: postgres/postgres
+* Access-token lifetime: 30 minutes
+* Refresh-token lifetime: 7 days
+* JWT algorithm: HS256
+
+Configuration problems:
+
+* VERAION is misspelled and likely intended to be VERSION.
+* The secret key is hard-coded.
+* The initial administrator password is hard-coded.
+* The Vite CORS origin is misspelled as hhtp://localhost:5173.
+* backend/.env.example is empty.
+* VS Code points to ${workspaceFolder}/.env, while the example is under backend/.
+* Pydantic settings read .env relative to the process working directory, making
+  launch location significant.
+
+Security
+~~~~~~~~
+
+Implemented utilities:
+
+* bcrypt password hashing
+* bcrypt password verification
+* JWT access-token creation
+
+Not implemented:
+
+* Login
+* Registration
+* Token decoding or validation
+* Refresh tokens
+* Logout or revocation
+* Password reset
+* Current-user dependency
+* Role checks
+* Route protection
+* Rate limiting
+* Audit logs
+* HTTPS enforcement
+
+JWT and bcrypt are therefore utility-level partial implementations, not a complete
+authentication system.
+
+Schemas and validation
+~~~~~~~~~~~~~~~~~~~~~~
+
+Both schema files are empty. There are no Pydantic request or response models.
+
+Application entry point
+~~~~~~~~~~~~~~~~~~~~~~~
+
+backend/app/main.py is empty. It contains no:
+
+* FastAPI() instance
+* Middleware
+* CORS setup
+* Route registration
+* Startup hooks
+* Health route
+* Exception handling
+
+
+FRONTEND STRUCTURE
+------------------
+
+There is no frontend directory and no frontend source code.
+
+Consequently, the following designed technologies and features are not implemented:
+
+* React
+* TypeScript
+* Routing
+* UI components
+* Authentication state
+* API client
+* React Query
+* Tailwind CSS
+* Patient, doctor, or administrator interfaces
+
+There are no frontend/backend contract inconsistencies to inspect at request or
+response level. The primary inconsistency is that the design describes a frontend
+that is absent.
+
+
+API ENDPOINTS
+-------------
+
+Actually implemented endpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+None.
+
+A repository-wide search found no FastAPI application, APIRouter, or route
+decorators such as @router.get or @app.post.
+
+Designed endpoints only
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The technical document lists 51 planned endpoints across:
+
+* Authentication
+* Patients
+* Doctors
+* Appointments
+* Consultations
+* Surgeries
+* Medical conditions
+* Hospitals
+* Administration
+
+None has a corresponding route handler. These endpoint descriptions must not be
+treated as active API behavior.
+
+There is also a planned-prefix inconsistency: runtime configuration proposes
+/api/v1, while the documentation lists endpoints under /api without /v1.
+
+
+AUTHENTICATION AND AUTHORIZATION
+--------------------------------
+
+Confirmed implementation:
+
+* A UserRole enumeration exists.
+* Password hashes can be created and checked.
+* An access JWT can be generated with a subject and expiration.
+
+Missing implementation:
+
+* Credential lookup and validation
+* Login endpoint
+* Registration endpoint
+* JWT decoding
+* Signature/expiration verification in request dependencies
+* Authorization enforcement based on UserRole
+* Refresh-token issuance and verification
+* Logout/revocation mechanism
+* Password reset
+
+Therefore authentication and authorization are not operational.
+
+
+IMPLEMENTED FEATURES
+--------------------
+
+Confirmed but mostly isolated:
+
+* Central settings object with PostgreSQL connection construction.
+* SQLAlchemy declarative base.
+* A database-session dependency pattern.
+* JWT access-token generation.
+* bcrypt password hashing and verification.
+* User-role enumeration.
+* Partial user, patient, hospital, and department ORM declarations.
+* Git repository and remote configuration.
+
+No user-facing or end-to-end feature is complete.
+
+
+PARTIALLY IMPLEMENTED FEATURES
+------------------------------
+
+User management
+~~~~~~~~~~~~~~~
+
+A user table and role enum exist, but there are no schemas, CRUD operations,
+endpoints, validation, or authentication workflow.
+
+Patient management
+~~~~~~~~~~~~~~~~~~
+
+Patient fields and planned relationships exist, but most related classes are absent
+and the user foreign key has a table-name case mismatch.
+
+Hospital management
+~~~~~~~~~~~~~~~~~~~
+
+Hospital fields exist, but the class name and relationship references do not agree.
+
+Department management
+~~~~~~~~~~~~~~~~~~~~~
+
+A department declaration exists, but it depends on missing or misnamed hospital and
+doctor classes.
+
+Authentication
+~~~~~~~~~~~~~~
+
+Token creation and password utilities exist, but authentication and authorization
+are not wired into an application.
+
+Database access
+~~~~~~~~~~~~~~~
+
+Engine and session scaffolding exist, but session configuration contains invalid
+keyword spellings and the model registry is broken.
+
+
+MISSING FEATURES
+----------------
+
+All documented functional modules remain missing as operational features,
+including:
+
+* FastAPI application startup
+* Registration and login
+* Authorization and RBAC enforcement
+* Patient profile endpoints
+* Doctor profiles and availability
+* Appointments
+* Consultations
+* Prescriptions
+* Medical-condition categories
+* Surgery workflows
+* Medical records and uploads
+* Hospital and department APIs
+* Administration UI and APIs
+* Reporting and analytics
+* Notifications
+* Audit trails
+* Billing and payment
+* Bed allocation
+* Database migrations and seed data
+* Frontend
+* Tests
+* Docker and deployment configuration
+* Operational documentation
+
+
+KNOWN AND SUSPECTED BUGS
+------------------------
+
+Application-blocking defects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. app/__init__.py imports modules that do not exist:
+
+   * app.models.hospital
+   * app.models.specialization
+   * app.models.condition
+   * app.models.consultation
+   * app.models.medical_record
+   * app.models.department
+
+   Actual similarly named files use plural forms in several cases.
+
+2. app/__init__.py also imports classes that do not exist because the corresponding
+   files are empty.
+
+3. main.py has no app object, so the conventional command
+   "uvicorn app.main:app" cannot start the service.
+
+4. SessionLocal uses incorrect arguments:
+
+   * autocomit instead of autocommit
+   * autoFlush instead of autoflush
+
+   These are expected to fail when a session is instantiated.
+
+5. Patient.user_id references users.id, but the declared table name is Users.
+
+ORM mapping defects
+~~~~~~~~~~~~~~~~~~~
+
+* relationship(..., useList=False) should use SQLAlchemy's uselist argument.
+* backpopulates should be back_populates.
+* Patient refers to "Consulation", misspelling Consultation.
+* Hospitals is declared, but relationships expect "Hospital".
+* Many relationship targets do not exist.
+* departments.py exists, while app/__init__.py imports department.py.
+* Both surgery.py and surgeries.py exist and are empty, creating naming ambiguity.
+* consultations.py is plural, while imports expect singular consultation.py.
+* admin.py contains imports only and no admin class.
+
+Configuration and security defects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Hard-coded SECRET_KEY.
+* Hard-coded default superuser password.
+* Empty .env.example.
+* Misspelled CORS URL.
+* No actual CORS middleware.
+* No password policy enforcement.
+* No JWT verification.
+* No refresh-token implementation despite refresh settings.
+* Database credentials embedded as defaults.
+* No .gitignore, increasing the risk that .env files, virtual environments,
+  caches, or secrets will later be committed.
+
+Data-model concerns
+~~~~~~~~~~~~~~~~~~~
+
+* Hospital name is nullable despite appearing essential.
+* Hospital license_number is unique but not non-null.
+* User date_of_birth uses DateTime rather than a date-only type.
+* No deletion behavior or cascade rules are specified.
+* No uniqueness constraint is present for department names within a hospital.
+* head_doctor_id has no mechanism ensuring the doctor belongs to the same hospital.
+* Patient allergies are stored as one string, limiting the structured checks
+  envisioned by the requirements.
+
+Code-quality findings
+~~~~~~~~~~~~~~~~~~~~~
+
+* No TODO, FIXME, XXX, HACK, placeholder marker, pass statement, or commented-out
+  implementation was found.
+* Numerous zero-byte files are implicit placeholders.
+* There is no automated formatting or lint configuration despite listing formatters
+  and linters as dependencies.
+* There are no tests for imports, mappings, security utilities, or database access.
+
+
+CONFIGURATION AND SETUP REQUIREMENTS
+------------------------------------
+
+Intended prerequisites
+~~~~~~~~~~~~~~~~~~~~~~
+
+Based on code and design:
+
+* Python 3.9 or newer
+* PostgreSQL
+* A Python virtual environment
+* Dependencies from backend/requirements.txt
+* A PostgreSQL database named hospital_db unless overridden
+* Environment values for database, JWT, email, and administrator settings
+
+Missing setup information
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The repository does not specify:
+
+* Exact Python version
+* Exact package versions
+* PostgreSQL version in executable configuration
+* Database creation command
+* Migration procedure
+* Seed procedure
+* Required .env contents
+* Development or production launch command
+* Frontend installation/startup
+* Test command
+* Deployment procedure
+
+The empty .env.example currently provides no guidance.
+
+
+HOW TO RUN THE APPLICATION
+--------------------------
+
+The application cannot be run successfully in its present state.
+
+The intended future backend workflow is inferable as:
+
+    cd backend
+    python -m venv .venv
+    # activate the virtual environment
+    pip install -r requirements.txt
+    # configure PostgreSQL and .env
+    uvicorn app.main:app --reload
+
+This is an inferred target workflow, not a currently valid procedure. At minimum,
+it would fail because:
+
+* app.main has no app object.
+* Package imports reference nonexistent modules.
+* ORM models are incomplete and inconsistent.
+* No migrations exist.
+* The environment example is empty.
+
+No frontend run procedure exists because no frontend exists.
+
+
+DOCUMENTATION ASSESSMENT
+------------------------
+
+There is no README.
+
+The two pre-existing documentation files are comprehensive requirements/design
+artifacts covering:
+
+* Business problem and stakeholders
+* Functional and non-functional requirements
+* User roles
+* Proposed database schema
+* Proposed endpoints
+* Proposed technology stack
+* Development phases
+* Testing and deployment intentions
+
+They substantially overstate current implementation if read as technical status
+documentation. For example, they describe API routes, RBAC, CORS, rate limiting,
+audit logging, Docker, React, migrations, and testing that do not exist in code.
+
+They should be retained as planning inputs, with a separate implementation-status
+document or requirements traceability matrix added later.
+
+
+GIT STATE AND HISTORY
+---------------------
+
+State at audit time
+~~~~~~~~~~~~~~~~~~~
+
+* Current branch: main
+* Tracking: origin/main
+* HEAD matched origin/main
+* No additional branches were found
+* No tags were found
+* Tracked worktree was clean
+* Documentation/ was the only untracked content
+* Remote: https://github.com/Msibi-TC/Healthcare-Information-System.git
+
+Commit history
+~~~~~~~~~~~~~~
+
+1. 02f8cb7 - 8 January 2026 - Initial commit
+
+   Added the project scaffold, dependency file, security utilities, department
+   model, settings file, and numerous empty placeholders.
+
+2. e8c82ff - 10 March 2026
+   "I wrote the code for models of the admin,hospital, patients and users."
+
+   Added settings, database setup, user/hospital/patient beginnings, and imports in
+   the admin model file.
+
+3. e0fbd35 - 10 March 2026 - "Finished the patient model."
+
+   Added patient medical profile fields, emergency-contact fields, timestamps, and
+   relationships.
+
+Most recently worked-on implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The most recent committed implementation is backend/app/models/patient.py,
+specifically:
+
+* Medical profile fields
+* Emergency-contact fields
+* Timestamps
+* Relationships to user, appointments, consultations, surgeries, and medical
+  records
+
+Although the commit message says "Finished the patient model," it is not
+operationally complete because several relationship targets are absent or
+misspelled and its user foreign key conflicts with the user table name.
+
+The documentation files had newer filesystem timestamps but were untracked and
+therefore were not part of committed project history at audit time.
+
+
+CURRENT DEVELOPMENT STATE
+-------------------------
+
+Best classification: initial scaffold / incomplete model-design phase.
+
+Layer                              State
+---------------------------------  -----------------------------
+Requirements/design                Extensive, untracked
+Backend project scaffold           Partial
+Configuration                      Partial, with defects
+Security utilities                 Partial
+ORM models                         Early and currently broken
+Database migrations                Missing
+Schemas and validation             Missing
+CRUD and business logic            Missing
+API                                Missing
+Authentication workflow            Missing
+Authorization                      Missing
+Frontend                           Missing
+Tests                              Missing
+Docker and deployment              Missing
+Local setup documentation          Missing
+
+
+RECOMMENDED NEXT STEPS
+----------------------
+
+1. Establish a reliable baseline.
+
+   * Add a README.
+   * Add .gitignore.
+   * Populate .env.example without secrets.
+   * Pin or constrain dependency versions.
+   * Decide and document supported Python and PostgreSQL versions.
+
+2. Make the backend minimally bootable.
+
+   * Create the FastAPI application.
+   * Correct module and class naming.
+   * Remove or postpone imports of nonexistent models.
+   * Fix SQLAlchemy session arguments.
+   * Add a basic health endpoint.
+
+3. Stabilize the database model layer.
+
+   * Choose consistent singular/plural filename and class conventions.
+   * Standardize lowercase table names.
+   * Implement models incrementally.
+   * Correct relationship names and targets.
+   * Add Alembic and generate an initial reviewed migration.
+
+4. Secure configuration.
+
+   * Remove default production-capable secrets.
+   * Require environment-provided secret keys and administrator credentials.
+   * Correct and implement CORS.
+   * Separate safe local-development defaults from production configuration.
+
+5. Build one vertical slice before expanding.
+
+   * User schema and model
+   * Registration
+   * Login
+   * JWT validation/current-user dependency
+   * Patient profile creation and retrieval
+   * Focused tests for the workflow
+
+6. Introduce implementation tracking.
+
+   * Map every documented requirement to Not started, In progress, Implemented,
+     or Verified.
+   * Keep planned endpoint documentation separate from generated OpenAPI
+     documentation.
+
+7. Add the frontend only after the first backend contract is stable, beginning
+   with authentication and patient-profile flows.
+
+
+END OF REPORT
+-------------
+
+This report is based on the repository contents and Git history available on
+14 August 2026. Planned behavior from the design documents has been explicitly
+separated from confirmed implementation.

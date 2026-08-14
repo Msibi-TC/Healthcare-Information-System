@@ -1,0 +1,2474 @@
+# HOSPITAL MANAGEMENT SYSTEM
+## Phase 1 - Project Proposal
+
+---
+
+## 1. NAME OF THE PROJECT
+
+**Multi-Hospital Management and Patient Care System (HMPCS)**
+
+**Alternative Name:** Integrated Healthcare Management Platform
+
+---
+
+## 2. DOMAIN ANALYSIS
+
+### General Field of Business
+
+The project operates within the **Healthcare Information Systems** domain, specifically focusing on hospital administration, patient management, and clinical workflow optimization. This domain encompasses the digitization and automation of healthcare delivery processes across multiple medical facilities.
+
+### Terminology and Glossary
+
+| Term | Definition |
+|------|------------|
+| **Patient** | Individual receiving medical care and treatment |
+| **Healthcare Provider** | Medical professional (doctor, nurse, specialist) delivering care |
+| **Appointment** | Scheduled meeting between patient and healthcare provider |
+| **Consultation** | Medical examination and diagnosis session |
+| **Medical Record** | Documentation of patient's health history, diagnoses, and treatments |
+| **Prescription** | Written order for medication or treatment |
+| **Surgery** | Medical procedure involving operative intervention |
+| **Surgical Team** | Group of medical professionals participating in surgery |
+| **Consent Form** | Legal document authorizing medical procedures |
+| **Medical Condition** | Disease, disorder, or health issue affecting a patient |
+| **Specialization** | Area of medical expertise (e.g., Cardiology, Neurology) |
+| **Admission** | Process of entering a patient into hospital care |
+| **Discharge** | Process of releasing a patient from hospital care |
+| **EHR (Electronic Health Record)** | Digital version of patient's medical history |
+| **Triage** | Process of determining priority of patient treatments |
+| **Ward** | Hospital division for specific patient care |
+| **Outpatient** | Patient receiving treatment without overnight stay |
+| **Inpatient** | Patient admitted for overnight hospital stay |
+
+### Understanding of Business Environment
+
+Healthcare facilities operate in a complex, highly regulated environment characterized by:
+
+- **24/7 Operations**: Continuous patient care requiring round-the-clock staffing
+- **Multi-disciplinary Teams**: Collaboration between doctors, nurses, specialists, and administrators
+- **Regulatory Compliance**: Adherence to health regulations, patient privacy laws (POPIA in South Africa)
+- **Critical Decision Making**: Time-sensitive medical decisions affecting patient outcomes
+- **Resource Management**: Efficient allocation of beds, equipment, and personnel
+- **Financial Complexity**: Insurance claims, billing, and payment processing
+- **Data Sensitivity**: Strict confidentiality and security requirements for patient information
+- **Quality Assurance**: Continuous monitoring of care standards and patient safety
+
+### Tasks and Procedures Currently Performed
+
+**Patient Management:**
+- Patient registration and demographic data collection
+- Medical history documentation
+- Appointment scheduling and management
+- Patient admission and discharge processes
+
+**Clinical Operations:**
+- Consultation and diagnosis documentation
+- Prescription writing and management
+- Laboratory test ordering and result tracking
+- Medical imaging requests and reports
+- Surgery scheduling and pre-operative assessment
+- Post-operative care monitoring
+
+**Administrative Functions:**
+- Staff scheduling and roster management
+- Bed allocation and ward management
+- Inventory management for medical supplies
+- Billing and payment processing
+- Insurance claim submissions
+- Report generation for management decisions
+
+**Current Challenges:**
+- Paper-based record keeping leading to data loss and retrieval difficulties
+- Manual appointment scheduling causing conflicts and inefficiencies
+- Lack of real-time information access across departments
+- Difficulty tracking patient history across multiple visits
+- Inadequate communication between healthcare providers
+- Time-consuming administrative processes
+- Limited analytics for resource optimization
+
+### Customers and Users
+
+**Primary Users:**
+- **Patients**: Individuals seeking medical care (100+ daily across facilities)
+- **Doctors/Physicians**: Medical professionals providing diagnoses and treatment (30-50 per hospital)
+- **Nurses**: Healthcare providers assisting in patient care (50-100 per hospital)
+- **Surgeons**: Specialists performing surgical procedures (10-20 per hospital)
+- **Hospital Administrators**: Management personnel overseeing operations (5-10 per hospital)
+- **Pharmacists**: Medication dispensing professionals
+- **Laboratory Technicians**: Diagnostic test processors
+- **Radiologists**: Medical imaging specialists
+
+**Secondary Users:**
+- **Billing Staff**: Financial processing personnel
+- **Receptionists**: Front-desk patient interaction staff
+- **IT Support**: System maintenance personnel
+
+### Competing Software
+
+**International Solutions:**
+1. **Epic Systems** - Comprehensive EHR and hospital management
+2. **Cerner** - Healthcare information technology solutions
+3. **Meditech** - Integrated healthcare information systems
+4. **Allscripts** - Practice management and EHR solutions
+5. **Athenahealth** - Cloud-based healthcare services
+
+**South African Solutions:**
+1. **Careways** - Hospital management system
+2. **MediRite** - Pharmacy and practice management
+3. **CliniServe** - Practice management software
+4. **HealthBridge** - Integrated healthcare solutions
+5. **MedAid** - Medical aid claim processing
+
+**Limitations of Existing Solutions:**
+- High licensing costs (R500,000 - R5,000,000 annually)
+- Complex implementation requiring extensive training
+- Limited customization for multi-hospital scenarios
+- Poor integration with South African medical aid systems
+- Inadequate support for local regulatory requirements
+- Over-featured for small to medium hospitals
+- Limited mobile accessibility
+
+### Similarities to Other Domains
+
+**University Management Systems:**
+- Student registration ≈ Patient registration
+- Course enrollment ≈ Appointment booking
+- Academic records ≈ Medical records
+- Lecturer assignment ≈ Doctor assignment
+
+**Hotel Management Systems:**
+- Room booking ≈ Bed allocation
+- Guest check-in/out ≈ Patient admission/discharge
+- Service requests ≈ Medical service orders
+- Billing and payments ≈ Hospital billing
+
+**Project Management Systems:**
+- Task assignment ≈ Treatment plans
+- Team collaboration ≈ Surgical team coordination
+- Resource allocation ≈ Medical equipment scheduling
+- Timeline tracking ≈ Treatment progress monitoring
+
+---
+
+## 3. DEFINE THE PROBLEM
+
+### Primary Problem Statement
+
+South African hospitals and medical facilities face significant operational inefficiencies due to fragmented, paper-based systems and lack of integrated digital solutions. This results in:
+
+1. **Patient Safety Risks**
+   - Medical errors due to incomplete patient history access
+   - Difficulty in identifying drug allergies and interactions
+   - Delays in emergency treatment due to information retrieval challenges
+
+2. **Operational Inefficiencies**
+   - Average 45-60 minutes wasted per day per doctor on administrative tasks
+   - 30% of appointments result in scheduling conflicts or no-shows
+   - Duplicate data entry across different departments
+   - Lost or misfiled patient records (15-20% of paper records)
+
+3. **Poor Resource Utilization**
+   - Bed occupancy rates below optimal levels due to poor tracking
+   - Surgical theater underutilization (30-40% downtime)
+   - Staff overtime costs due to inefficient scheduling
+   - Medical supply wastage and stock-outs
+
+4. **Limited Accessibility**
+   - Patients cannot easily access their medical history
+   - Doctors lack real-time patient information during consultations
+   - Difficulty in coordinating care across multiple facilities
+   - No remote access to patient data for emergencies
+
+5. **Compliance and Legal Issues**
+   - Incomplete surgical consent documentation
+   - Difficulty in audit trail creation for legal purposes
+   - Challenges in meeting POPIA (Protection of Personal Information Act) requirements
+   - Inadequate backup and disaster recovery procedures
+
+### Opportunity for Improvement
+
+Implementing an integrated, multi-hospital management system will:
+
+1. **Enhance Patient Safety**
+   - Immediate access to complete medical history
+   - Automated allergy and drug interaction alerts
+   - Reduced medical errors through standardized workflows
+
+2. **Improve Productivity**
+   - 60-70% reduction in administrative time
+   - 40% improvement in appointment scheduling efficiency
+   - Faster patient check-in and discharge processes
+   - Real-time data availability eliminating redundant data entry
+
+3. **Optimize Resources**
+   - 25-30% improvement in bed utilization
+   - Better surgical theater scheduling increasing utilization by 35%
+   - Data-driven staff scheduling reducing overtime costs by 20%
+   - Inventory optimization reducing waste by 30%
+
+4. **Increase Revenue**
+   - Faster billing and claims processing (50% reduction in payment cycle)
+   - Reduced revenue leakage from missed charges (15-20% improvement)
+   - Better capacity utilization increasing patient throughput by 25%
+
+5. **Enable Data-Driven Decision Making**
+   - Analytics on patient demographics and disease patterns
+   - Performance metrics for quality improvement
+   - Predictive analytics for resource planning
+   - Evidence-based policy making
+
+---
+
+## 4. DEFINE THE SCOPE
+
+### Precise Problem Definition
+
+**Primary Focus:** Develop a web-based, multi-hospital management system that digitizes and integrates patient care workflows, administrative processes, and clinical documentation across multiple healthcare facilities in South Africa.
+
+**Specific Problems Addressed:**
+1. Fragmented patient information across departments and facilities
+2. Inefficient appointment scheduling and management
+3. Lack of comprehensive medical history tracking
+4. Manual and error-prone surgical consent and documentation processes
+5. Limited visibility into hospital operations and resource utilization
+
+### IRBM Framework Application
+
+#### **INPUTS**
+
+**Human Resources:**
+- 3-5 Software Developers
+- 1 Project Manager
+- 1 Database Administrator
+- 1 UI/UX Designer
+- 2 Quality Assurance Testers
+- Medical domain experts (consultants)
+
+**Financial Resources:**
+- Development costs: R500,000 - R800,000
+- Infrastructure costs: R100,000 - R150,000
+- Training and deployment: R50,000 - R100,000
+- Annual maintenance: R150,000 - R200,000
+
+**Technical Resources:**
+- Development environment (computers, software licenses)
+- Cloud hosting infrastructure (AWS/Azure/local servers)
+- Database management systems (PostgreSQL)
+- Development tools (FastAPI, React, TypeScript)
+- Version control and project management tools
+
+**Information Resources:**
+- Healthcare regulations and compliance requirements
+- Medical terminology and coding systems (ICD-10)
+- User requirements from hospitals and medical staff
+- Existing hospital workflows and procedures
+
+#### **ACTIVITIES**
+
+**Phase 1: Analysis and Design (Weeks 1-4)**
+- Requirements gathering from hospitals
+- System architecture design
+- Database schema development
+- User interface mockups and prototypes
+
+**Phase 2: Development (Weeks 5-16)**
+- Backend API development
+- Frontend application development
+- Database implementation
+- Integration of system components
+
+**Phase 3: Testing (Weeks 17-20)**
+- Unit testing of components
+- Integration testing
+- User acceptance testing with medical staff
+- Security and performance testing
+
+**Phase 4: Deployment and Training (Weeks 21-24)**
+- System deployment to pilot hospital
+- Staff training programs
+- Data migration from legacy systems
+- Go-live support
+
+**Phase 5: Monitoring and Optimization (Ongoing)**
+- Performance monitoring
+- User feedback collection
+- Bug fixes and improvements
+- Feature enhancements
+
+#### **OUTPUTS**
+
+**Tangible Outputs:**
+1. Fully functional web-based hospital management system
+2. Mobile-responsive patient portal
+3. Comprehensive user documentation and manuals
+4. Training materials and videos
+5. System administration guides
+6. Source code and technical documentation
+7. Database backup and recovery procedures
+8. API documentation for future integrations
+
+**Functional Capabilities:**
+- Patient registration and profile management
+- Appointment scheduling and management
+- Electronic health records (EHR)
+- Prescription management
+- Surgery scheduling and consent documentation
+- Medical records storage and retrieval
+- Multi-hospital coordination
+- Role-based access control
+- Reporting and analytics dashboards
+
+#### **OUTCOMES**
+
+**Short-term Outcomes (3-6 months):**
+- 50% reduction in patient registration time
+- 40% decrease in appointment scheduling conflicts
+- 60% reduction in paper-based documentation
+- 100% digital consent form compliance for surgeries
+- 70% improvement in medical record retrieval time
+
+**Medium-term Outcomes (6-12 months):**
+- 30% improvement in bed utilization rates
+- 25% increase in patient throughput
+- 40% reduction in administrative staff workload
+- 35% faster billing and claims processing
+- 90% user adoption rate among medical staff
+
+**Long-term Outcomes (12-24 months):**
+- 20% reduction in medical errors and adverse events
+- 15% improvement in patient satisfaction scores
+- 25% reduction in operational costs
+- Improved compliance with healthcare regulations
+- Enhanced reputation and competitive advantage
+
+#### **IMPACT**
+
+**Community Impact:**
+- **Improved Healthcare Access**: Patients receive faster, more efficient care
+- **Better Health Outcomes**: Reduced medical errors lead to improved patient safety
+- **Economic Benefits**: Lower healthcare costs through operational efficiencies
+- **Job Creation**: New opportunities for IT professionals in healthcare
+- **Digital Transformation**: Modernization of South African healthcare sector
+
+**Stakeholder Impact:**
+- **Patients**: Better care coordination, easier access to medical records, reduced wait times
+- **Healthcare Providers**: More time for patient care, less administrative burden
+- **Hospital Management**: Data-driven insights for better decision-making
+- **Government**: Improved healthcare quality metrics, better resource allocation
+- **Society**: Healthier population, more efficient public health spending
+
+### IRBM Assessment Questions
+
+#### **Assess: What is the current situation?**
+
+South African hospitals operate with:
+- 70% paper-based record keeping
+- Manual appointment scheduling via phone calls and physical registers
+- Fragmented patient information across departments
+- Average 30-45 minute patient check-in time
+- 25-30% appointment no-show rates
+- Limited after-hours access to patient records
+- Surgical consent forms stored in physical files
+- Difficulty tracking patient history across multiple visits
+- Inadequate analytics for operational improvement
+
+**Key Statistics:**
+- Only 15% of private hospitals have integrated EMR systems
+- Public hospitals: less than 5% digital adoption
+- Average medical record retrieval time: 15-20 minutes
+- Patient data duplication rate: 20-25%
+- Administrative tasks consume 40% of doctor's time
+
+#### **Think: What caused it? Who is involved?**
+
+**Root Causes:**
+1. **Cost Barriers**: High licensing fees for commercial healthcare software (R3-5 million)
+2. **Complexity**: Existing solutions too complex for small-medium hospitals
+3. **Lack of Localization**: International systems don't address South African requirements
+4. **Resistance to Change**: Medical staff comfortable with traditional methods
+5. **Infrastructure Gaps**: Limited IT infrastructure in some facilities
+6. **Training Deficits**: Insufficient digital literacy among healthcare workers
+7. **Regulatory Uncertainty**: Evolving healthcare IT regulations
+
+**Stakeholders Involved:**
+- **Primary**: Patients, Doctors, Nurses, Hospital Administrators
+- **Secondary**: Government health departments, Medical aid providers, IT vendors
+- **Tertiary**: Pharmaceutical companies, Laboratory services, Medical equipment suppliers
+
+**Impact on Stakeholders:**
+- **Patients**: Delayed care, repeated tests, safety risks
+- **Doctors**: Increased workload, burnout, liability risks
+- **Administrators**: Operational inefficiencies, revenue leakage
+- **Society**: Higher healthcare costs, suboptimal health outcomes
+
+#### **Envision: What are we going to achieve?**
+
+**Vision:**
+A modern, integrated healthcare ecosystem where:
+- Every patient has a complete, accessible digital health record
+- Healthcare providers have real-time access to patient information
+- Hospitals operate efficiently with optimized resource utilization
+- Administrative tasks are automated, allowing focus on patient care
+- Data-driven insights drive continuous improvement in care quality
+- Multiple hospitals coordinate seamlessly for better patient outcomes
+
+**Specific Goals:**
+1. **Patient-Centric Care**: Complete medical history accessible at point of care
+2. **Operational Excellence**: 50% reduction in administrative overhead
+3. **Quality and Safety**: 30% reduction in medical errors
+4. **Financial Sustainability**: 20% improvement in operational efficiency
+5. **Digital Transformation**: 90% digital adoption across all facilities
+6. **Scalability**: System supporting 10+ hospitals and 100,000+ patients
+
+#### **Plan: How are we going to do it? With whom? When? With what resources?**
+
+**Implementation Strategy:**
+
+**How:**
+1. **Agile Development Methodology**: Iterative development with regular stakeholder feedback
+2. **Phased Rollout**: Pilot in one hospital, then expand gradually
+3. **User-Centered Design**: Involve medical staff in design and testing
+4. **Change Management**: Comprehensive training and support programs
+5. **Cloud-First Approach**: Scalable, secure cloud infrastructure
+6. **API-Driven Architecture**: Enable future integrations with external systems
+
+**With Whom:**
+
+**Internal Team:**
+- Project Manager: Overall coordination and delivery
+- Lead Developer (Backend): API and business logic development
+- Lead Developer (Frontend): User interface development
+- Database Administrator: Data modeling and optimization
+- UI/UX Designer: User experience and interface design
+- QA Engineers (2): Testing and quality assurance
+
+**External Partners:**
+- Medical consultants: Domain expertise and validation
+- Hospital administrators: Requirements and feedback
+- IT infrastructure providers: Hosting and infrastructure
+- Training providers: Staff training and change management
+- Legal advisors: Compliance and regulatory guidance
+
+**When:**
+
+| Phase | Duration | Timeline |
+|-------|----------|----------|
+| Planning and Design | 4 weeks | Weeks 1-4 |
+| Core Development | 12 weeks | Weeks 5-16 |
+| Testing and QA | 4 weeks | Weeks 17-20 |
+| Deployment and Training | 4 weeks | Weeks 21-24 |
+| **Total Project Duration** | **24 weeks** | **6 months** |
+
+**Milestones:**
+- Week 4: Requirements and design complete
+- Week 10: Core modules functional (authentication, patient management)
+- Week 16: All features complete, ready for testing
+- Week 20: Testing complete, ready for deployment
+- Week 24: System live in pilot hospital
+
+**With What Resources:**
+
+**Budget Allocation:**
+- Personnel (60%): R600,000
+- Infrastructure (20%): R200,000
+- Tools and Licenses (10%): R100,000
+- Training (5%): R50,000
+- Contingency (5%): R50,000
+- **Total Budget**: R1,000,000
+
+**Technical Resources:**
+- Cloud infrastructure (AWS/Azure): R10,000/month
+- Development tools and licenses: R50,000
+- Testing environments: R30,000
+- Database licenses (PostgreSQL - open source): R0
+- Version control and CI/CD tools: R20,000
+
+**Human Resources:**
+- Development team: 1,200 person-hours
+- Design and UX: 200 person-hours
+- Testing and QA: 400 person-hours
+- Project management: 300 person-hours
+- Documentation: 100 person-hours
+
+---
+
+## 5. VISION AND OBJECTIVES
+
+### Vision Statement
+
+*"To transform healthcare delivery in South Africa by providing an integrated, accessible, and intelligent hospital management platform that empowers healthcare providers to deliver exceptional patient care while optimizing operational efficiency across multiple medical facilities."*
+
+### Mission Statement
+
+*"Develop a robust, user-friendly hospital management system that digitizes clinical workflows, centralizes patient information, and enables data-driven decision-making to improve patient outcomes and operational excellence."*
+
+### SMART Objectives
+
+#### Objective 1: System Development and Deployment
+**Specific**: Develop and deploy a fully functional multi-hospital management system with patient registration, appointment scheduling, medical records, and surgery management modules.
+
+**Measurable**: System will support 5 hospitals, 10,000 patients, 200 healthcare providers, and process 500 appointments per day.
+
+**Achievable**: Using proven technologies (FastAPI, React, PostgreSQL) with experienced development team.
+
+**Relevant**: Directly addresses core operational inefficiencies in hospital management.
+
+**Time-bound**: Complete development and pilot deployment within 6 months (24 weeks).
+
+#### Objective 2: Operational Efficiency Improvement
+**Specific**: Reduce administrative overhead and improve resource utilization across participating hospitals.
+
+**Measurable**: 
+- Reduce patient registration time by 50% (from 15 minutes to 7.5 minutes)
+- Decrease appointment scheduling time by 60% (from 10 minutes to 4 minutes)
+- Improve bed utilization rate by 25% (from 60% to 75%)
+- Reduce paper consumption by 80%
+
+**Achievable**: Through automation of manual processes and real-time data access.
+
+**Relevant**: Directly impacts hospital operational costs and patient satisfaction.
+
+**Time-bound**: Achieve targets within 3 months post-deployment.
+
+#### Objective 3: User Adoption and Training
+**Specific**: Ensure high user adoption and competency among all hospital staff categories.
+
+**Measurable**:
+- Train 100% of hospital staff in system usage
+- Achieve 90% user adoption rate within first 2 months
+- User satisfaction score of 4.0/5.0 or higher
+- Less than 10% of users requiring additional training
+
+**Achievable**: Through comprehensive training programs and intuitive user interface design.
+
+**Relevant**: System success depends on user acceptance and proper utilization.
+
+**Time-bound**: Complete training within 4 weeks of deployment; achieve adoption targets within 8 weeks.
+
+#### Objective 4: Patient Safety and Quality of Care
+**Specific**: Improve patient safety through better information access and reduced medical errors.
+
+**Measurable**:
+- Reduce medication errors by 30%
+- Decrease duplicate tests by 40%
+- Improve surgical consent documentation compliance to 100%
+- Reduce average emergency response time by 20%
+
+**Achievable**: Through immediate access to patient history, allergy alerts, and standardized workflows.
+
+**Relevant**: Core healthcare objective of improved patient outcomes.
+
+**Time-bound**: Achieve measurable improvements within 6 months post-deployment.
+
+#### Objective 5: Financial Sustainability
+**Specific**: Improve hospital financial performance through better billing, reduced costs, and increased efficiency.
+
+**Measurable**:
+- Reduce billing cycle time by 40% (from 30 days to 18 days)
+- Decrease administrative costs by 25%
+- Increase patient throughput by 20%
+- Achieve ROI (Return on Investment) within 18 months
+
+**Achievable**: Through automated billing, efficient workflows, and better resource utilization.
+
+**Relevant**: Financial viability ensures long-term system sustainability.
+
+**Time-bound**: Demonstrate financial benefits within 12 months of operation.
+
+#### Objective 6: Scalability and Future Growth
+**Specific**: Build a scalable platform capable of supporting additional hospitals and features.
+
+**Measurable**:
+- Support 10 hospitals within 12 months
+- Handle 50,000 patient records with < 2 second response time
+- Achieve 99.5% system uptime
+- Enable API integrations with 3 external systems (medical aid, labs, pharmacies)
+
+**Achievable**: Through cloud infrastructure and modular architecture.
+
+**Relevant**: Ensures long-term value and adaptability to changing needs.
+
+**Time-bound**: Achieve scalability targets within 12-18 months.
+
+---
+
+## 6. USERS OF THE SYSTEM
+
+### User Categories and Roles
+
+#### 1. **Patients**
+**Role**: Healthcare service recipients
+
+**Access Level**: Limited (own data only)
+
+**Primary Functions**:
+- Register and create patient account
+- View personal medical history
+- Book, reschedule, and cancel appointments
+- Select medical conditions from categories
+- View prescriptions and treatment plans
+- Access test results
+- Update personal information
+- Sign digital consent forms for surgeries
+- View billing and payment history
+
+**User Characteristics**:
+- Age range: All ages (18+ for independent access)
+- Technical proficiency: Low to medium
+- Frequency of use: Occasional (during medical needs)
+- Access method: Web portal, mobile app
+
+**Estimated Users**: 10,000 - 50,000 per hospital
+
+---
+
+#### 2. **Doctors/Physicians**
+**Role**: Primary healthcare providers and medical decision-makers
+
+**Access Level**: High (patient data access with audit trail)
+
+**Primary Functions**:
+- View patient medical history and records
+- Manage appointment schedules and availability
+- Create and update consultation notes
+- Write and manage prescriptions
+- Order laboratory tests and imaging
+- Review test results
+- Create treatment plans
+- Request and schedule surgeries
+- Access patient vitals and latest observations
+- Generate medical reports and certificates
+- View assigned patients list
+
+**User Characteristics**:
+- Professional medical qualification required
+- Technical proficiency: Medium
+- Frequency of use: Daily, multiple sessions
+- Access method: Desktop, tablet, mobile
+
+**Estimated Users**: 30-50 per hospital
+
+---
+
+#### 3. **Surgeons**
+**Role**: Specialized doctors performing surgical procedures
+
+**Access Level**: High (includes all doctor permissions plus surgery-specific functions)
+
+**Primary Functions**:
+- All doctor functions
+- Schedule surgical procedures
+- Assign surgical team members
+- Create and manage surgery plans
+- Review and approve consent forms
+- Document pre-operative assessments
+- Complete post-operative reports
+- Track surgery outcomes
+- Manage operating theater bookings
+
+**User Characteristics**:
+- Specialized medical qualification
+- Technical proficiency: Medium
+- Frequency of use: Daily
+- Access method: Desktop, tablet
+
+**Estimated Users**: 10-20 per hospital
+
+---
+
+#### 4. **Nurses**
+**Role**: Patient care providers and clinical support staff
+
+**Access Level**: Medium (patient care data, limited administrative access)
+
+**Primary Functions**:
+- Record patient vitals and observations
+- View assigned patient lists
+- Update patient care plans
+- Administer medications (record administration)
+- Assist in consultations
+- Prepare patients for procedures
+- Monitor patient progress
+- Update nursing notes
+- Manage ward activities
+
+**User Characteristics**:
+- Nursing qualification required
+- Technical proficiency: Low to medium
+- Frequency of use: Daily, continuous throughout shift
+- Access method: Desktop, mobile tablets
+
+**Estimated Users**: 50-100 per hospital
+
+---
+
+#### 5. **Hospital Administrators**
+**Role**: Facility management and operational oversight
+
+**Access Level**: High (administrative functions, system-wide visibility)
+
+**Primary Functions**:
+- Manage hospital information and settings
+- Add and manage staff members (doctors, nurses)
+- Configure departments and specializations
+- Manage bed allocation and ward assignments
+- View system-wide analytics and reports
+- Configure medical condition categories
+- Monitor system usage and performance
+- Manage hospital resources (equipment, rooms)
+- Generate management reports
+- Handle billing and payment oversight
+- Configure appointment slots and schedules
+
+**User Characteristics**:
+- Healthcare administration background
+- Technical proficiency: Medium to high
+- Frequency of use: Daily
+- Access method: Desktop
+
+**Estimated Users**: 5-10 per hospital
+
+---
+
+#### 6. **Super Administrators**
+**Role**: System-wide management across multiple hospitals
+
+**Access Level**: Highest (all system functions and configurations)
+
+**Primary Functions**:
+- All administrator functions across all hospitals
+- Create and manage hospitals in the system
+- Assign hospital administrators
+- Configure system-wide settings
+- Manage user roles and permissions
+- Monitor multi-hospital analytics
+- System maintenance and updates
+- Database backup and recovery
+- Security and compliance management
+- License management
+
+**User Characteristics**:
+- IT and healthcare management expertise
+- Technical proficiency: High
+- Frequency of use: Daily
+- Access method: Desktop, secure remote access
+
+**Estimated Users**: 2-5 system-wide
+
+---
+
+#### 7. **Receptionists/Front Desk Staff**
+**Role**: Patient check-in and administrative support
+
+**Access Level**: Low to Medium (patient registration, appointment scheduling)
+
+**Primary Functions**:
+- Register new patients
+- Schedule and manage appointments
+- Patient check-in and check-out
+- Update patient contact information
+- Print appointment cards
+- Answer patient queries
+- Manage waiting lists
+- Process payments (basic)
+
+**User Characteristics**:
+- Administrative background
+- Technical proficiency: Low to medium
+- Frequency of use: Daily, continuous
+- Access method: Desktop
+
+**Estimated Users**: 10-20 per hospital
+
+---
+
+#### 8. **Pharmacists**
+**Role**: Medication dispensing and management
+
+**Access Level**: Medium (prescription access, medication records)
+
+**Primary Functions**:
+- View patient prescriptions
+- Dispense medications
+- Track medication inventory
+- Check drug interactions and allergies
+- Update medication administration records
+- Manage pharmacy stock
+- Generate prescription reports
+
+**User Characteristics**:
+- Pharmacy qualification required
+- Technical proficiency: Medium
+- Frequency of use: Daily
+- Access method: Desktop
+
+**Estimated Users**: 5-10 per hospital
+
+---
+
+#### 9. **Laboratory Technicians**
+**Role**: Diagnostic test processing and results management
+
+**Access Level**: Medium (test orders, results entry)
+
+**Primary Functions**:
+- Receive laboratory test orders
+- Record test results
+- Upload lab reports
+- Manage sample tracking
+- Generate lab reports
+- Quality control documentation
+
+**User Characteristics**:
+- Medical laboratory background
+- Technical proficiency: Medium
+- Frequency of use: Daily
+- Access method: Desktop
+
+**Estimated Users**: 10-15 per hospital
+
+---
+
+### User Role Summary Table
+
+| User Type | Access Level | Primary Interaction | Frequency | Estimated Count/Hospital |
+|-----------|-------------|---------------------|-----------|-------------------------|
+| Patients | Limited | Patient Portal | Occasional | 10,000-50,000 |
+| Doctors | High | Clinical Module | Daily | 30-50 |
+| Surgeons | High | Surgery Module | Daily | 10-20 |
+| Nurses | Medium | Nursing Module | Daily | 50-100 |
+| Hospital Admin | High | Admin Dashboard | Daily | 5-10 |
+| Super Admin | Highest | System Admin | Daily | 2-5 (total) |
+| Receptionists | Medium | Front Desk Module | Daily | 10-20 |
+| Pharmacists | Medium | Pharmacy Module | Daily | 5-10 |
+| Lab Technicians | Medium | Laboratory Module | Daily | 10-15 |
+
+---
+
+## 7. MANDATORY FUNCTIONS
+
+The system MUST provide complete CRUD (Create, Read, Update, Delete) operations for all core entities:
+
+### 7.1 User Management
+
+**CREATE (Add/Register)**
+- Register new users (patients, doctors, nurses, administrators)
+- Create user accounts with role assignment
+- Set initial passwords and authentication credentials
+- Assign users to specific hospitals
+
+**READ (View/Retrieve)**
+- View user profiles and details
+- List all users with filtering capabilities
+- Search users by name, email, role, or ID
+- Display user activity logs
+- View user permissions and access levels
+
+**UPDATE (Modify)**
+- Update user personal information
+- Change user roles and permissions
+- Modify contact details
+- Update professional credentials
+- Change passwords
+- Activate/deactivate user accounts
+
+**DELETE (Remove)**
+- Deactivate user accounts (soft delete)
+- Remove user access permissions
+- Archive inactive users
+- Maintain audit trail of deleted users
+
+---
+
+### 7.2 Patient Management
+
+**CREATE**
+- Register new patients with demographic information
+- Create patient medical profiles
+- Add emergency contact information
+- Generate unique patient identification numbers
+
+**READ**
+- View complete patient profiles
+- Display patient medical history
+- Access patient appointments and consultations
+- View patient prescriptions and medications
+- Retrieve patient test results
+- Display patient allergies and medical conditions
+
+**UPDATE**
+- Modify patient personal information
+- Update medical history and conditions
+- Change emergency contacts
+- Update patient allergies
+- Modify patient vitals (height, weight, blood group)
+
+**DELETE**
+- Deactivate patient records (soft delete)
+- Archive old patient files
+- Remove duplicate patient entries (with proper verification)
+
+---
+
+### 7.3 Appointment Management
+
+**CREATE**
+- Book new appointments
+- Schedule recurring appointments
+- Create appointment slots for doctors
+- Generate appointment confirmations
+
+**READ**
+- View appointment details
+- List appointments by patient, doctor, date, or hospital
+- Display appointment status
+- View appointment history
+- Show available appointment slots
+
+**UPDATE**
+- Reschedule appointments
+- Change appointment status (scheduled, completed, cancelled, no-show)
+- Update appointment notes
+- Modify appointment duration
+- Reassign appointments to different doctors
+
+**DELETE**
+- Cancel appointments
+- Remove expired appointment slots
+- Delete duplicate appointments
+
+---
+
+### 7.4 Medical Conditions Management
+
+**CREATE**
+- Add new medical condition categories
+- Create specific medical conditions within categories
+- Define severity levels for conditions
+
+**READ**
+- View all condition categories
+- List conditions by category
+- Display condition details and descriptions
+- Search conditions by name or category
+
+**UPDATE**
+- Modify condition descriptions
+- Update severity levels
+- Change condition categorization
+
+**DELETE**
+- Remove obsolete conditions
+- Archive unused condition categories
+
+---
+
+### 7.5 Doctor Management
+
+**CREATE**
+- Register new doctors
+- Add doctor specializations
+- Create doctor availability schedules
+- Set consultation fees
+
+**READ**
+- View doctor profiles
+- List doctors by specialization or hospital
+- Display doctor schedules and availability
+- View doctor patient assignments
+- Show doctor consultation history
+
+**UPDATE**
+- Modify doctor information
+- Update specializations
+- Change availability schedules
+- Update consultation fees
+- Modify doctor qualifications
+
+**DELETE**
+- Deactivate doctor accounts
+- Remove doctors from specific hospitals
+- Archive retired doctors
+
+---
+
+### 7.6 Consultation Management
+
+**CREATE**
+- Create consultation records after patient visits
+- Add diagnosis information
+- Record symptoms and physical examination findings
+- Create treatment plans
+- Generate consultation notes
+
+**READ**
+- View consultation details
+- Access patient consultation history
+- Display diagnosis and treatment plans
+- Review doctor's notes
+- View follow-up requirements
+
+**UPDATE**
+- Modify consultation notes
+- Update diagnosis
+- Change treatment plans
+- Update follow-up dates
+
+**DELETE**
+- Remove erroneous consultation entries
+- Archive old consultations
+
+---
+
+### 7.7 Prescription Management
+
+**CREATE**
+- Add prescriptions to consultations
+- Create medication orders
+- Specify dosage, frequency, and duration
+- Add special instructions
+
+**READ**
+- View patient prescriptions
+- Display active medications
+- List prescription history
+- Show medication details
+
+**UPDATE**
+- Modify medication dosages
+- Change prescription duration
+- Update administration instructions
+- Renew prescriptions
+
+**DELETE**
+- Discontinue medications
+- Remove duplicate prescriptions
+- Cancel pending prescriptions
+
+---
+
+### 7.8 Surgery Management
+
+**CREATE**
+- Schedule new surgeries
+- Create surgery plans
+- Generate consent forms
+- Assign surgical team members
+- Book operating theaters
+
+**READ**
+- View surgery schedules
+- Display surgery details
+- Access surgical team assignments
+- Review consent forms
+- View surgery reports
+
+**UPDATE**
+- Reschedule surgeries
+- Modify surgery plans
+- Update surgical team
+- Change surgery status
+- Update post-operative reports
+
+**DELETE**
+- Cancel scheduled surgeries
+- Remove duplicate surgery entries
+- Archive completed surgeries
+
+---
+
+### 7.9 Hospital Management
+
+**CREATE**
+- Add new hospitals to the system
+- Create hospital departments
+- Add hospital facilities and resources
+
+**READ**
+- View hospital information
+- List all hospitals in the system
+- Display hospital departments
+- Show hospital statistics
+
+**UPDATE**
+- Modify hospital details
+- Update hospital capacity (beds)
+- Change hospital contact information
+- Update department information
+
+**DELETE**
+- Deactivate hospitals
+- Remove departments
+- Archive closed facilities
+
+---
+
+### 7.10 Medical Records Management
+
+**CREATE**
+- Upload medical documents
+- Add lab results
+- Create imaging reports
+- Record vaccinations
+- Document chronic conditions
+
+**READ**
+- View patient medical records
+- Access test results
+- Display imaging reports
+- Review vaccination history
+
+**UPDATE**
+- Modify record descriptions
+- Update record categories
+- Change record dates
+
+**DELETE**
+- Remove duplicate records
+- Archive old medical documents
+- Delete erroneous entries
+
+---
+
+## 8. FUNCTIONAL REQUIREMENTS
+
+### 8.1 User Authentication and Authorization
+
+**FR-1.1**: The system shall allow users to register with email, password, name, role, and contact information.
+
+**FR-1.2**: The system shall authenticate users using email and password credentials.
+
+**FR-1.3**: The system shall generate JWT (JSON Web Token) for authenticated sessions with 30-minute expiration.
+
+**FR-1.4**: The system shall enforce role-based access control with roles: Patient, Doctor, Nurse, Admin, Super Admin.
+
+**FR-1.5**: The system shall allow users to change their passwords securely.
+
+**FR-1.6**: The system shall automatically log out users after 30 minutes of inactivity.
+
+**FR-1.7**: The system shall provide password reset functionality via email.
+
+### 8.2 Patient Management
+
+**FR-2.1**: The system shall allow patients to register with demographic information (name, date of birth, gender, contact details).
+
+**FR-2.2**: The system shall generate a unique patient ID upon registration.
+
+**FR-2.3**: The system shall store patient medical information (blood group, height, weight, allergies).
+
+**FR-2.4**: The system shall allow patients to update their profile information.
+
+**FR-2.5**: The system shall maintain emergency contact information for each patient.
+
+**FR-2.6**: The system shall allow patients to select medical conditions from predefined categories.
+
+**FR-2.7**: The system shall display complete patient medical history to authorized users (doctors, nurses).
+
+**FR-2.8**: The system shall search patients by name, email, ID, or phone number.
+
+### 8.3 Appointment Scheduling
+
+**FR-3.1**: The system shall allow patients to book appointments with doctors by selecting:
+   - Hospital
+   - Medical condition/reason
+   - Doctor (filtered by specialization)
+   - Preferred date and time
+
+**FR-3.2**: The system shall display doctor availability in real-time.
+
+**FR-3.3**: The system shall prevent double-booking of appointment slots.
+
+**FR-3.4**: The system shall send appointment confirmation to patients via email/SMS.
+
+**FR-3.5**: The system shall allow patients to reschedule or cancel appointments up to 24 hours before.
+
+**FR-3.6**: The system shall allow doctors to view their daily, weekly, and monthly appointment schedules.
+
+**FR-3.7**: The system shall mark appointments as: Scheduled, Completed, Cancelled, or No-Show.
+
+**FR-3.8**: The system shall filter appointments by status, date range, doctor, or patient.
+
+**FR-3.9**: The system shall calculate and display appointment statistics (total, completed, cancelled, no-shows).
+
+### 8.4 Consultation and Diagnosis
+
+**FR-4.1**: The system shall allow doctors to create consultation records after patient appointments.
+
+**FR-4.2**: The system shall capture: diagnosis, symptoms, physical examination findings, treatment plan.
+
+**FR-4.3**: The system shall link consultations to specific appointments.
+
+**FR-4.4**: The system shall allow doctors to indicate follow-up requirements and dates.
+
+**FR-4.5**: The system shall display patient consultation history chronologically.
+
+**FR-4.6**: The system shall allow doctors to add clinical notes and observations.
+
+**FR-4.7**: The system shall track which doctor conducted each consultation.
+
+### 8.5 Prescription Management
+
+**FR-5.1**: The system shall allow doctors to prescribe medications during or after consultations.
+
+**FR-5.2**: The system shall capture for each prescription:
+   - Medication name
+   - Dosage
+   - Frequency
+   - Duration (in days)
+   - Special instructions
+
+**FR-5.3**: The system shall link prescriptions to consultations.
+
+**FR-5.4**: The system shall display active and historical prescriptions for patients.
+
+**FR-5.5**: The system shall allow doctors to modify or discontinue prescriptions.
+
+**FR-5.6**: The system shall check patient allergies before prescription creation (alert if conflict).
+
+**FR-5.7**: The system shall generate printable prescription documents.
+
+### 8.6 Surgery Management
+
+**FR-6.1**: The system shall allow surgeons to schedule surgical procedures with:
+   - Patient
+   - Surgery type
+   - Scheduled date and time
+   - Expected duration
+   - Operating room assignment
+
+**FR-6.2**: The system shall allow assignment of surgical team members with roles:
+   - Surgeon
+   - Assistant Surgeon
+   - Anesthesiologist
+   - Nurses
+   - Technicians
+
+**FR-6.3**: The system shall generate digital consent forms for surgeries containing:
+   - Surgery details
+   - Risks explained
+   - Alternatives discussed
+   - Patient signature
+   - Witness signature
+   - Consent date and time
+
+**FR-6.4**: The system shall require completed consent forms before surgery can proceed.
+
+**FR-6.5**: The system shall allow surgeons to create post-operative reports including:
+   - Pre-operative diagnosis
+   - Post-operative diagnosis
+   - Procedure description
+   - Complications (if any)
+   - Blood loss
+   - Anesthesia type
+   - Actual start and end times
+   - Surgeon notes
+
+**FR-6.6**: The system shall track surgery status: Scheduled, In Progress, Completed, Cancelled.
+
+**FR-6.7**: The system shall display upcoming surgeries for surgeons and surgical team members.
+
+**FR-6.8**: The system shall track which surgeon and team members participated in each surgery.
+
+### 8.7 Medical Records Management
+
+**FR-7.1**: The system shall allow storage of medical records categorized as:
+   - Laboratory results
+   - Imaging reports (X-ray, MRI, CT scan)
+   - Vaccination records
+   - Allergy documentation
+   - Chronic condition records
+
+**FR-7.2**: The system shall allow doctors and authorized staff to upload medical documents.
+
+**FR-7.3**: The system shall associate medical records with specific patients.
+
+**FR-7.4**: The system shall timestamp and track who created each medical record.
+
+**FR-7.5**: The system shall allow patients to view their own medical records.
+
+**FR-7.6**: The system shall support common document formats (PDF, JPEG, PNG, DICOM).
+
+**FR-7.7**: The system shall allow searching and filtering medical records by type and date.
+
+### 8.8 Multi-Hospital Management
+
+**FR-8.1**: The system shall support multiple hospitals within a single system instance.
+
+**FR-8.2**: The system shall associate doctors with specific hospitals.
+
+**FR-8.3**: The system shall allow patients to book appointments at any hospital in the system.
+
+**FR-8.4**: The system shall track which hospital each appointment occurs at.
+
+**FR-8.5**: The system shall allow hospital administrators to manage their specific hospital settings.
+
+**FR-8.6**: The system shall allow super administrators to create and configure hospitals.
+
+**FR-8.7**: The system shall maintain hospital-specific data: name, address, contact info, bed capacity.
+
+### 8.9 Department and Specialization Management
+
+**FR-9.1**: The system shall maintain a list of medical specializations (Cardiology, Neurology, etc.).
+
+**FR-9.2**: The system shall associate doctors with their specialization(s).
+
+**FR-9.3**: The system shall allow creation of hospital departments.
+
+**FR-9.4**: The system shall assign department heads (doctors).
+
+**FR-9.5**: The system shall filter doctors by specialization during appointment booking.
+
+### 8.10 Medical Condition Categorization
+
+**FR-10.1**: The system shall maintain categories of medical conditions:
+   - Cardiovascular
+   - Respiratory
+   - Neurological
+   - Musculoskeletal
+   - Digestive
+   - Mental Health
+   - Endocrine
+   - Skin Conditions
+   - Infectious Diseases
+   - Eye & Vision
+
+**FR-10.2**: The system shall allow patients to select conditions from categories during appointment booking.
+
+**FR-10.3**: The system shall classify conditions by severity: Mild, Moderate, Severe, Critical.
+
+**FR-10.4**: The system shall allow administrators to add new conditions and categories.
+
+### 8.11 Reporting and Analytics
+
+**FR-11.1**: The system shall generate reports showing:
+   - Total appointments by period
+   - Patient registration trends
+   - Doctor workload statistics
+   - Surgery statistics
+   - Bed utilization rates
+   - Revenue and billing summaries
+
+**FR-11.2**: The system shall provide dashboard analytics for administrators.
+
+**FR-11.3**: The system shall display patient statistics (total visits, upcoming appointments).
+
+**FR-11.4**: The system shall show system-wide user statistics (total users by role).
+
+**FR-11.5**: The system shall generate exportable reports in CSV/PDF formats.
+
+### 8.12 Search and Filter Capabilities
+
+**FR-12.1**: The system shall provide search functionality for:
+   - Patients (by name, ID, email, phone)
+   - Doctors (by name, specialization, hospital)
+   - Appointments (by patient, doctor, date, status)
+   - Medical records (by type, date)
+
+**FR-12.2**: The system shall support pagination for large result sets.
+
+**FR-12.3**: The system shall allow filtering with multiple criteria combined.
+
+**FR-12.4**: The system shall return search results within 2 seconds for up to 10,000 records.
+
+### 8.13 Audit Trail and Logging
+
+**FR-13.1**: The system shall log all user authentication attempts (successful and failed).
+
+**FR-13.2**: The system shall track who created, updated, or deleted each record.
+
+**FR-13.3**: The system shall timestamp all database operations.
+
+**FR-13.4**: The system shall maintain audit logs for sensitive operations (viewing patient records, surgeries).
+
+**FR-13.5**: The system shall allow administrators to view audit logs.
+
+**FR-13.6**: The system shall retain audit logs for minimum 7 years (compliance requirement).
+
+### 8.14 Data Validation and Integrity
+
+**FR-14.1**: The system shall validate email addresses format before registration.
+
+**FR-14.2**: The system shall enforce password complexity rules (minimum 6 characters).
+
+**FR-14.3**: The system shall validate phone numbers format.
+
+**FR-14.4**: The system shall prevent duplicate patient registrations (check email, ID number).
+
+**FR-14.5**: The system shall ensure referential integrity between related records (appointments-patients-doctors).
+
+**FR-14.6**: The system shall validate date formats and ranges (no future dates for past records).
+
+### 8.15 Notification System
+
+**FR-15.1**: The system shall send email notifications for:
+   - Appointment confirmations
+   - Appointment reminders (24 hours before)
+   - Appointment cancellations
+   - Password reset requests
+   - Surgery schedules
+
+**FR-15.2**: The system shall display in-app notifications for users.
+
+**FR-15.3**: The system shall allow users to configure notification preferences.
+
+### Inputs and Outputs Summary
+
+**System Inputs:**
+- User registration data
+- Patient demographic and medical information
+- Appointment booking requests
+- Consultation notes and diagnoses
+- Prescription details
+- Surgery schedules and team assignments
+- Consent form signatures
+- Medical record documents
+- Hospital and department configurations
+
+**System Outputs:**
+- User authentication tokens
+- Patient profiles and medical histories
+- Appointment schedules and confirmations
+- Consultation records and prescriptions
+- Surgery schedules and reports
+- Medical record listings
+- Statistical reports and analytics
+- Audit logs
+- Email/SMS notifications
+
+**Computations:**
+- Appointment slot availability calculation
+- Patient statistics aggregation
+- User statistics compilation
+- Date/time conflict detection
+- Age calculation from date of birth
+- BMI calculation (from height/weight)
+- Bed utilization percentages
+- Report generation and data aggregation
+
+**Timing and Synchronization:**
+- Real-time appointment availability updates
+- Immediate reflection of data changes across all user sessions
+- Scheduled email notifications (appointment reminders sent 24 hours prior)
+- Session timeout after 30 minutes of inactivity
+- Automatic logout on token expiration
+- Concurrent user access handling
+- Database transaction management for data consistency
+
+---
+
+## 9. NON-FUNCTIONAL REQUIREMENTS
+
+### 9.1 Authentication and Security
+
+**NFR-1.1 Authentication Process**
+
+**Login Sequence:**
+1. User navigates to login page
+2. User enters email address and password
+3. System validates credentials against database
+4. If valid:
+   - System generates JWT access token (30-minute expiration)
+   - System returns token to client
+   - Client stores token in local storage
+   - User is redirected to dashboard
+5. If invalid:
+   - System returns error message "Incorrect email or password"
+   - User remains on login page
+
+**Logout Sequence:**
+1. User clicks logout button
+2. System removes access token from client storage
+3. User is redirected to login page
+4. All active sessions are terminated
+
+**Password Requirements:**
+- Minimum 6 characters in length
+- Must contain at least one letter
+- Passwords are hashed using bcrypt algorithm before storage
+- Password reset requires email verification
+
+**Session Management:**
+- Session expires after 30 minutes of inactivity
+- User must re-authenticate after expiration
+- System automatically logs out inactive users
+
+**Security Measures:**
+- All passwords stored as bcrypt hashes (never plain text)
+- JWT tokens signed with secret key
+- HTTPS enforced for all communications in production
+- SQL injection prevention through ORM (SQLAlchemy)
+- Input validation and sanitization on all user inputs
+- Rate limiting on authentication endpoints (max 5 attempts per minute)
+
+### 9.2 Availability and Reliability
+
+**NFR-2.1 System Availability**
+- Target uptime: 99.5% (maximum 3.65 hours downtime per month)
+- Planned maintenance windows: Sundays 2:00 AM - 4:00 AM
+- Emergency maintenance response time: Within 4 hours
+
+**NFR-2.2 Backup and Recovery**
+- Automated daily database backups at 2:00 AM
+- Backup retention: 30 days
+- Recovery Time Objective (RTO): 4 hours
+- Recovery Point Objective (RPO): 24 hours
+- Monthly backup restoration testing
+
+**NFR-2.3 Fault Tolerance**
+- Database connection pooling with automatic retry
+- Graceful error handling with user-friendly messages
+- System continues operating if non-critical services fail
+
+**NFR-2.4 Data Integrity**
+- ACID compliance for all database transactions
+- Foreign key constraints enforced
+- Cascade delete operations for dependent records
+- Data validation before database commits
+
+### 9.3 Performance
+
+**NFR-3.1 Response Time**
+- Page load time: Maximum 3 seconds
+- API response time: Maximum 2 seconds for 95% of requests
+- Database query execution: Maximum 1 second for standard queries
+- Search functionality: Maximum 2 seconds for 10,000 records
+
+**NFR-3.2 Scalability**
+- Support 1,000 concurrent users
+- Handle 10,000 patient records per hospital
+- Process 500 appointments per day per hospital
+- Database capable of storing 100,000+ patient records
+
+**NFR-3.3 Resource Utilization**
+- Maximum server CPU usage: 70% under normal load
+- Maximum memory usage: 8GB RAM for application server
+- Database server: 16GB RAM recommended
+- Network bandwidth: Minimum 100 Mbps
+
+### 9.4 Usability
+
+**NFR-4.1 User Interface**
+- Responsive design supporting desktop, tablet, and mobile devices
+- Minimum screen resolution: 1024x768 pixels
+- Touch-friendly interface for tablet users
+- Consistent color scheme and branding across all pages
+- Maximum 3 clicks to reach any major function
+
+**NFR-4.2 Accessibility**
+- WCAG 2.1 Level AA compliance
+- Keyboard navigation support
+- Screen reader compatible
+- Color contrast ratio minimum 4.5:1
+- Alt text for all images
+
+**NFR-4.3 Learnability**
+- New users can complete basic tasks within 15 minutes of training
+- Inline help and tooltips for complex functions
+- Clear error messages with remediation guidance
+- Consistent navigation patterns across modules
+
+**NFR-4.4 User Feedback**
+- Form validation with immediate feedback
+- Success messages for completed actions
+- Loading indicators for operations taking > 1 second
+- Confirmation dialogs for destructive actions (delete, cancel)
+
+### 9.5 Compatibility
+
+**NFR-5.1 Browser Support**
+- Google Chrome (latest 2 versions)
+- Mozilla Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Microsoft Edge (latest 2 versions)
+- Minimum JavaScript ES6 support required
+
+**NFR-5.2 Device Compatibility**
+- Desktop computers (Windows, macOS, Linux)
+- Tablets (iPad, Android tablets)
+- Smartphones (iOS, Android) - limited functionality
+- Minimum screen width: 320px (mobile)
+
+**NFR-5.3 Database Compatibility**
+- PostgreSQL 12 or higher
+- Support for future PostgreSQL versions
+
+### 9.6 Maintainability
+
+**NFR-6.1 Code Quality**
+- Modular architecture with clear separation of concerns
+- Comprehensive code comments and documentation
+- Consistent coding standards (PEP 8 for Python)
+- Version control using Git
+- Code review required before deployment
+
+**NFR-6.2 Testing**
+- Minimum 70% unit test coverage
+- Integration tests for all API endpoints
+- Automated regression testing
+- User acceptance testing before major releases
+
+**NFR-6.3 Documentation**
+- API documentation using OpenAPI/Swagger
+- User manuals for all user roles
+- System administration guide
+- Database schema documentation
+- Deployment and configuration guides
+
+### 9.7 Compliance and Legal
+
+**NFR-7.1 Data Protection**
+- Compliance with POPIA (Protection of Personal Information Act) - South Africa
+- GDPR compliance for international users
+- Patient data encrypted at rest and in transit
+- Audit trail for all data access and modifications
+
+**NFR-7.2 Healthcare Regulations**
+- Compliance with Health Professions Council of South Africa (HPCSA) guidelines
+- Medical record retention: Minimum 7 years
+- Consent documentation for all medical procedures
+- Patient privacy and confidentiality maintained
+
+**NFR-7.3 Audit and Compliance**
+- Comprehensive audit logs for all system activities
+- Tamper-proof logging mechanism
+- Regular security audits (quarterly)
+- Compliance reporting capabilities
+
+### 9.8 Localization
+
+**NFR-8.1 Language Support**
+- Primary language: English
+- Date format: DD/MM/YYYY (South African standard)
+- Time format: 24-hour clock
+- Currency: South African Rand (ZAR)
+
+**NFR-8.2 Regional Settings**
+- Time zone: South Africa Standard Time (SAST - UTC+2)
+- Phone number format: +27 XX XXX XXXX
+- Address format: South African postal addresses
+
+### 9.9 Data Management
+
+**NFR-9.1 Data Retention**
+- Active patient records: Indefinite retention
+- Inactive patient records (no activity > 2 years): Archive but retain
+- Audit logs: Minimum 7 years
+- Consultation records: Minimum 7 years
+- Financial records: Minimum 5 years
+
+**NFR-9.2 Data Archival**
+- Automated archival of records older than 5 years
+- Archive access within 24 hours upon request
+- Archived data maintained in read-only format
+
+**NFR-9.3 Data Export**
+- Patient data exportable in PDF and CSV formats
+- Medical records downloadable in original formats
+- Bulk data export for administrators
+- API support for third-party integrations
+
+### 9.10 Error Handling
+
+**NFR-10.1 Error Management**
+- User-friendly error messages (no technical jargon for end users)
+- Detailed error logging for developers
+- Automatic error reporting to administrators for critical failures
+- Graceful degradation when non-critical components fail
+
+**NFR-10.2 Input Validation**
+- Client-side validation for immediate feedback
+- Server-side validation for security
+- Sanitization of all user inputs
+- Prevention of XSS and SQL injection attacks
+
+### 9.11 Monitoring and Logging
+
+**NFR-11.1 System Monitoring**
+- Real-time server health monitoring
+- Database performance monitoring
+- Application performance monitoring (APM)
+- Automated alerts for system anomalies
+
+**NFR-11.2 Application Logging**
+- Structured logging with log levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+- Centralized log management
+- Log rotation to prevent disk space exhaustion
+- Log retention: 90 days for application logs
+
+### 9.12 Deployment and Configuration
+
+**NFR-12.1 Deployment**
+- Containerized deployment using Docker
+- Environment-specific configurations (development, staging, production)
+- Zero-downtime deployment capability
+- Automated deployment pipeline (CI/CD)
+
+**NFR-12.2 Configuration Management**
+- Environment variables for sensitive configurations
+- Configuration file validation before deployment
+- Separate configurations for each environment
+- Configuration change tracking
+
+---
+
+## 10. USE CASE DIAGRAMS
+
+### 10.1 Patient Use Cases
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PATIENT USE CASES                             │
+│                                                                   │
+│                                                                   │
+│      ┌──────────┐                                                │
+│      │ Patient  │                                                │
+│      └────┬─────┘                                                │
+│           │                                                      │
+│           ├─────────► Register Account                          │
+│           │                                                      │
+│           ├─────────► Login to System                           │
+│           │                                                      │
+│           ├─────────► Update Personal Profile                   │
+│           │                                                      │
+│           ├─────────► Select Medical Conditions                 │
+│           │                    ▼                                │
+│           │           ┌───────────────────┐                     │
+│           ├─────────► │ Book Appointment  │                     │
+│           │           └────────┬──────────┘                     │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────┐                  │
+│           │           │ Choose Hospital      │                  │
+│           │           └──────────────────────┘                  │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────┐                  │
+│           │           │ Select Doctor        │                  │
+│           │           └──────────────────────┘                  │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────┐                  │
+│           │           │ Pick Date and Time   │                  │
+│           │           └──────────────────────┘                  │
+│           │                                                      │
+│           ├─────────► View Appointment History                  │
+│           │                                                      │
+│           ├─────────► Reschedule Appointment                    │
+│           │                                                      │
+│           ├─────────► Cancel Appointment                        │
+│           │                                                      │
+│           ├─────────► View Medical History                      │
+│           │                                                      │
+│           ├─────────► View Prescriptions                        │
+│           │                                                      │
+│           ├─────────► Download Medical Records                  │
+│           │                                                      │
+│           ├─────────► Sign Surgery Consent Form                 │
+│           │                                                      │
+│           └─────────► Change Password                           │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### 10.2 Doctor Use Cases
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    DOCTOR USE CASES                              │
+│                                                                   │
+│      ┌──────────┐                                                │
+│      │  Doctor  │                                                │
+│      └────┬─────┘                                                │
+│           │                                                      │
+│           ├─────────► Login to System                           │
+│           │                                                      │
+│           ├─────────► View Appointment Schedule                 │
+│           │                                                      │
+│           ├─────────► View Patient List                         │
+│           │                                                      │
+│           ├─────────► Access Patient Medical History            │
+│           │                    │                                │
+│           │                    │ <<extends>>                    │
+│           │                    ▼                                │
+│           │           ┌────────────────────┐                    │
+│           │           │ View Allergies     │                    │
+│           │           └────────────────────┘                    │
+│           │                    │                                │
+│           │                    │ <<extends>>                    │
+│           │                    ▼                                │
+│           │           ┌────────────────────┐                    │
+│           │           │ View Past          │                    │
+│           │           │ Consultations      │                    │
+│           │           └────────────────────┘                    │
+│           │                                                      │
+│           ├─────────► Create Consultation Record                │
+│           │                    ▼                                │
+│           │           ┌───────────────────┐                     │
+│           │           │ Enter Diagnosis   │                     │
+│           │           └───────────────────┘                     │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌───────────────────┐                     │
+│           │           │ Record Symptoms   │                     │
+│           │           └───────────────────┘                     │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌───────────────────────┐                 │
+│           │           │ Create Treatment Plan │                 │
+│           │           └───────────────────────┘                 │
+│           │                                                      │
+│           ├─────────► Prescribe Medication                      │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌───────────────────────┐                 │
+│           │           │ Check Allergies       │                 │
+│           │           └───────────────────────┘                 │
+│           │                                                      │
+│           ├─────────► Request Laboratory Tests                  │
+│           │                                                      │
+│           ├─────────► View Test Results                         │
+│           │                                                      │
+│           ├─────────► Update Consultation Notes                 │
+│           │                                                      │
+│           ├─────────► Set Follow-up Appointment                 │
+│           │                                                      │
+│           ├─────────► Generate Medical Certificate              │
+│           │                                                      │
+│           └─────────► Update Availability Schedule              │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### 10.3 Surgeon Use Cases
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    SURGEON USE CASES                             │
+│                                                                   │
+│      ┌──────────┐                                                │
+│      │ Surgeon  │                                                │
+│      └────┬─────┘                                                │
+│           │                                                      │
+│           │ (Inherits all Doctor use cases)                     │
+│           │                                                      │
+│           ├─────────► Schedule Surgery                           │
+│           │                    ▼                                │
+│           │           ┌───────────────────────┐                 │
+│           │           │ Select Patient        │                 │
+│           │           └───────────────────────┘                 │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌───────────────────────┐                 │
+│           │           │ Set Surgery Date/Time │                 │
+│           │           └───────────────────────┘                 │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌───────────────────────┐                 │
+│           │           │ Book Operating Room   │                 │
+│           │           └───────────────────────┘                 │
+│           │                                                      │
+│           ├─────────► Assign Surgical Team                      │
+│           │                    ▼                                │
+│           │           ┌────────────────────────┐                │
+│           │           │ Add Team Members       │                │
+│           │           │ - Assistant Surgeon    │                │
+│           │           │ - Anesthesiologist     │                │
+│           │           │ - Nurses               │                │
+│           │           │ - Technicians          │                │
+│           │           └────────────────────────┘                │
+│           │                                                      │
+│           ├─────────► Generate Consent Form                     │
+│           │                    │                                │
+│           │                    │ <<extends>>                    │
+│           │                    ▼                                │
+│           │           ┌────────────────────────┐                │
+│           │           │ Verify Patient         │                │
+│           │           │ Understanding          │                │
+│           │           └────────────────────────┘                │
+│           │                                                      │
+│           ├─────────► View Upcoming Surgeries                   │
+│           │                                                      │
+│           ├─────────► Complete Surgery Report                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────────┐              │
+│           │           │ Document Pre-op Diagnosis│              │
+│           │           └──────────────────────────┘              │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────────┐              │
+│           │           │ Document Post-op         │              │
+│           │           │ Diagnosis                │              │
+│           │           └──────────────────────────┘              │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────────┐              │
+│           │           │ Record Procedure Details │              │
+│           │           └──────────────────────────┘              │
+│           │                    │                                │
+│           │                    │ <<includes>>                   │
+│           │                    ▼                                │
+│           │           ┌──────────────────────────┐              │
+│           │           │ Document Complications   │              │
+│           │           │ (if any)                 │              │
+│           │           └──────────────────────────┘              │
+│           │                                                      │
+│           ├─────────► Update Surgery Status                     │
+│           │                                                      │
+│           └─────────► Cancel Surgery                            │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### 10.4 Administrator Use Cases
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                  ADMINISTRATOR USE CASES                         │
+│                                                                   │
+│      ┌────────────┐                                              │
+│      │   Admin    │                                              │
+│      └─────┬──────┘                                              │
+│            │                                                     │
+│            ├─────────► Login to System                          │
+│            │                                                     │
+│            ├─────────► Manage Users                             │
+│            │                    ▼                               │
+│            │           ┌──────────────────┐                     │
+│            │           │ Create User      │                     │
+│            │           └──────────────────┘                     │
+│            │                    │                               │
+│            │                    │ <<extends>>                   │
+│            │                    ▼                               │
+│            │           ┌──────────────────┐                     │
+│            │           │ Update User      │                     │
+│            │           └──────────────────┘                     │
+│            │                    │                               │
+│            │                    │ <<extends>>                   │
+│            │                    ▼                               │
+│            │           ┌──────────────────┐                     │
+│            │           │ Deactivate User  │                     │
+│            │           └──────────────────┘                     │
+│            │                    │                               │
+│            │                    │ <<extends>>                   │
+│            │                    ▼                               │
+│            │           ┌──────────────────┐                     │
+│            │           │ Reset Password   │                     │
+│            │           └──────────────────┘                     │
+│            │                                                     │
+│            ├─────────► Manage Hospital Information              │
+│            │                                                     │
+│            ├─────────► Manage Departments                       │
+│            │                                                     │
+│            ├─────────► Configure Specializations                │
+│            │                                                     │
+│            ├─────────► Manage Medical Conditions                │
+│            │                    ▼                               │
+│            │           ┌───────────────────────┐                │
+│            │           │ Add Condition         │                │
+│            │           │ Categories            │                │
+│            │           └───────────────────────┘                │
+│            │                    │                               │
+│            │                    │ <<includes>>                  │
+│            │                    ▼                               │
+│            │           ┌───────────────────────┐                │
+│            │           │ Add Specific          │                │
+│            │           │ Conditions            │                │
+│            │           └───────────────────────┘                │
+│            │                                                     │
+│            ├─────────► View System Analytics                    │
+│            │                    ▼                               │
+│            │           ┌───────────────────────┐                │
+│            │           │ Patient Statistics    │                │
+│            │           └───────────────────────┘                │
+│            │                    │                               │
+│            │                    │ <<extends>>                   │
+│            │                    ▼                               │
+│            │           ┌───────────────────────┐                │
+│            │           │ Appointment Stats     │                │
+│            │           └───────────────────────┘                │
+│            │                    │                               │
+│            │                    │ <<extends>>                   │
+│            │                    ▼                               │
+│            │           ┌───────────────────────┐                │
+│            │           │ Resource Utilization  │                │
+│            │           └───────────────────────┘                │
+│            │                                                     │
+│            ├─────────► Generate Reports                         │
+│            │                                                     │
+│            ├─────────► Manage Bed Allocation                    │
+│            │                                                     │
+│            ├─────────► Configure System Settings                │
+│            │                                                     │
+│            ├─────────► View Audit Logs                          │
+│            │                                                     │
+│            └─────────► Backup Database                          │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### 10.5 Complete System Use Case Diagram
+
+```
+┌────────────────────────────────────────────────────────────────────────────┐
+│                   HOSPITAL MANAGEMENT SYSTEM - ALL USE CASES                │
+│                                                                              │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │ Patient  │──────┐                                                      │
+│    └──────────┘      │                                                      │
+│                      │                                                      │
+│                      ├────► Register Account                                │
+│    ┌──────────┐     │                                                      │
+│    │  Doctor  │─────┤                                                      │
+│    └──────────┘     │                                                      │
+│                     ├────► Login/Logout                                    │
+│    ┌──────────┐    │                                                       │
+│    │  Nurse   │────┤                                                       │
+│    └──────────┘    │                                                       │
+│                    ├────► Update Profile                                   │
+│    ┌──────────┐   │                                                        │
+│    │  Admin   │───┘                                                        │
+│    └──────────┘                                                            │
+│                                                                              │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │ Patient  │───────► Book Appointment                                   │
+│    └──────────┘                  │                                         │
+│                                   ├─► Select Hospital                      │
+│                                   ├─► Choose Medical Condition             │
+│                                   ├─► Select Doctor                        │
+│                                   └─► Pick Date/Time                       │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │ Patient  │───────► View Medical History                               │
+│    │  Doctor  │                                                             │
+│    └──────────┘                                                             │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │  Doctor  │───────► Create Consultation                                │
+│    └──────────┘                  │                                         │
+│                                   ├─► Enter Diagnosis                      │
+│                                   ├─► Record Symptoms                      │
+│                                   └─► Create Treatment Plan                │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │  Doctor  │───────► Prescribe Medication                               │
+│    └──────────┘                  │                                         │
+│                                   └─► Check Drug Allergies                 │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │ Surgeon  │───────► Schedule Surgery                                   │
+│    └──────────┘                  │                                         │
+│                                   ├─► Assign Surgical Team                 │
+│                                   ├─► Generate Consent Form                │
+│                                   └─► Complete Surgery Report              │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │  Admin   │───────► Manage Users                                       │
+│    └──────────┘                  │                                         │
+│                                   ├─► Create User                          │
+│                                   ├─► Update User                          │
+│                                   ├─► Deactivate User                      │
+│                                   └─► Reset Password                       │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │  Admin   │───────► View Analytics                                     │
+│    └──────────┘                  │                                         │
+│                                   ├─► Patient Statistics                   │
+│                                   ├─► Appointment Statistics               │
+│                                   └─► Resource Utilization                 │
+│                                                                              │
+│    ┌──────────┐                                                             │
+│    │  Admin   │───────► Manage Hospital                                    │
+│    └──────────┘                  │                                         │
+│                                   ├─► Configure Departments                │
+│                                   ├─► Manage Specializations               │
+│                                   └─► Manage Medical Conditions            │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.6 Detailed Use Case: Book Appointment
+
+**Use Case Name**: Book Appointment
+
+**Actors**: Patient, System
+
+**Preconditions**:
+- Patient must be registered and logged in
+- At least one hospital exists in the system
+- At least one doctor is available
+
+**Main Flow**:
+1. Patient navigates to "Book Appointment" page
+2. System displays list of hospitals
+3. Patient selects a hospital
+4. System displays medical condition categories
+5. Patient selects condition category
+6. System displays specific conditions within category
+7. Patient selects specific condition(s)
+8. System displays doctors filtered by specialization matching the condition
+9. Patient selects a doctor
+10. System displays doctor's available appointment slots
+11. Patient selects preferred date and time
+12. Patient adds appointment notes/reason (optional)
+13. Patient confirms appointment booking
+14. System validates appointment slot availability
+15. System creates appointment record
+16. System sends confirmation email to patient
+17. System displays success message with appointment details
+
+**Alternative Flows**:
+
+*3a. No hospitals available*
+- System displays "No hospitals available" message
+- Use case ends
+
+*10a. No available slots*
+- System displays "No available appointments" message
+- Patient can select different doctor or date
+- Return to step 9
+
+*14a. Appointment slot no longer available (concurrent booking)*
+- System displays error message "Slot no longer available"
+- Return to step 10
+
+**Postconditions**:
+- Appointment is created in database
+- Appointment status set to "Scheduled"
+- Patient receives confirmation email
+- Doctor's schedule is updated
+
+**Special Requirements**:
+- Response time: < 2 seconds for each step
+- Real-time slot availability checking
+- Email sent within 1 minute of booking
+
+---
+
+### 10.7 Detailed Use Case: Create Consultation Record
+
+**Use Case Name**: Create Consultation Record
+
+**Actors**: Doctor, System
+
+**Preconditions**:
+- Doctor must be logged in
+- Appointment must exist and be in "Scheduled" or "Completed" status
+- Patient must be registered
+
+**Main Flow**:
+1. Doctor navigates to patient's appointment
+2. System displays patient information and medical history
+3. Doctor reviews patient allergies and past consultations
+4. Doctor enters diagnosis
+5. Doctor records symptoms observed/reported
+6. Doctor creates treatment plan
+7. Doctor indicates if follow-up is required
+8. If follow-up required, doctor sets follow-up date
+9. Doctor adds consultation notes
+10. Doctor saves consultation record
+11. System validates all required fields
+12. System creates consultation record linked to appointment
+13. System updates appointment status to "Completed"
+14. System displays success message
+
+**Alternative Flows**:
+
+*6a. Doctor wants to prescribe medication*
+- Include "Prescribe Medication" use case
+- Return to step 7
+
+*11a. Required fields missing*
+- System displays validation errors
+- Return to step 4
+
+**Postconditions**:
+- Consultation record created in database
+- Appointment status updated to "Completed"
+- Consultation linked to doctor and patient
+- Timestamp recorded
+
+**Special Requirements**:
+- Consultation history must be immediately visible to other doctors
+- Audit trail of who created/modified consultation
+
+---
+
+## 11. TOOLS AND TECHNOLOGIES TO BE USED
+
+### 11.1 Backend Technologies
+
+**Primary Framework**: **FastAPI (Python)**
+- **Version**: 0.109.0 or higher
+- **Purpose**: RESTful API development, backend business logic
+- **Justification**:
+  - High performance (async support)
+  - Automatic API documentation (Swagger/OpenAPI)
+  - Type validation with Pydantic
+  - Modern Python features
+  - Easy to learn and maintain
+  - Excellent for rapid development
+
+**Programming Language**: **Python 3.9+**
+- Modern, widely-used language
+- Rich ecosystem of libraries
+- Strong community support
+- Ideal for healthcare applications
+
+**ORM (Object-Relational Mapping)**: **SQLAlchemy 2.0+**
+- Database abstraction layer
+- Type-safe database operations
+- Migration support via Alembic
+- Prevents SQL injection attacks
+- Supports complex queries
+
+**Database Migration Tool**: **Alembic**
+- Version control for database schema
+- Automatic migration generation
+- Rollback capabilities
+
+### 11.2 Database
+
+**Database Management System**: **PostgreSQL 14+**
+- **Justification**:
+  - Open-source and free
+  - ACID compliance for data integrity
+  - Excellent performance for healthcare data
+  - Support for complex queries
+  - JSON data type support
+  - Robust security features
+  - Widely used in production environments
+  - Strong South African hosting support
+
+**Database Tools**:
+- **pgAdmin 4**: GUI for database management
+- **DBeaver**: Multi-platform database tool
+- **PostgreSQL CLI**: Command-line interface
+
+### 11.3 Frontend Technologies
+
+**Primary Framework**: **React 18+**
+- **Version**: 18.2.0 or higher
+- **Purpose**: User interface development
+- **Justification**:
+  - Component-based architecture
+  - Virtual DOM for performance
+  - Large ecosystem and community
+  - Reusable components
+  - SEO-friendly (with SSR)
+  - Mobile-responsive capabilities
+
+**Programming Language**: **TypeScript 4.9+**
+- Static typing for error prevention
+- Better IDE support
+- Enhanced code quality
+- Self-documenting code
+- Easier refactoring
+
+**State Management**: **React Query (TanStack Query)**
+- Server state management
+- Automatic caching
+- Background updates
+- Optimistic updates
+- Easy API integration
+
+**Styling**: **Tailwind CSS 3+**
+- Utility-first CSS framework
+- Rapid UI development
+- Consistent design system
+- Mobile-first responsive design
+- Small production bundle size
+
+**HTTP Client**: **Axios**
+- Promise-based HTTP requests
+- Request/response interceptors
+- Automatic JSON transformation
+- Error handling
+
+**Routing**: **React Router 6+**
+- Client-side routing
+- Nested routes support
+- Protected routes
+- Navigation management
+
+### 11.4 Authentication & Security
+
+**Authentication**: **JWT (JSON Web Tokens)**
+- Stateless authentication
+- Secure token-based auth
+- Scalable across multiple servers
+
+**Password Hashing**: **bcrypt**
+- Industry-standard password hashing
+- Salt generation
+- Protection against rainbow table attacks
+
+**Security Libraries**:
+- **python-jose**: JWT implementation for Python
+- **passlib**: Password hashing library
+
+### 11.5 Development Tools
+
+**Version Control**: **Git + GitHub/GitLab**
+- Source code management
+- Collaboration
+- Code review workflows
+- Version history
+
+**Package Managers**:
+- **pip**: Python package management
+- **npm/yarn**: JavaScript package management
+
+**API Testing**:
+- **Postman**: API testing and documentation
+- **Swagger UI**: Interactive API documentation
+- **curl**: Command-line API testing
+
+**Code Editor/IDE**:
+- **Visual Studio Code**: Primary code editor
+- **PyCharm**: Python-specific IDE (optional)
+- **WebStorm**: JavaScript IDE (optional)
+
+### 11.6 Testing Tools
+
+**Backend Testing**:
+- **pytest**: Python testing framework
+- **pytest-asyncio**: Async test support
+- **httpx**: HTTP testing client
+
+**Frontend Testing**:
+- **Jest**: JavaScript testing framework
+- **React Testing Library**: Component testing
+- **Cypress**: End-to-end testing
+
+### 11.7 DevOps & Deployment
+
+**Containerization**: **Docker**
+- Application containerization
+- Consistent environments
+- Easy deployment
+
+**Container Orchestration**: **Docker Compose**
+- Multi-container applications
+- Development environment setup
+- Service orchestration
+
+**Cloud Hosting Options**:
+- **AWS (Amazon Web Services)**
+  - EC2: Virtual servers
+  - RDS: Managed PostgreSQL
+  - S3: File storage
+- **Microsoft Azure**
+  - Virtual Machines
+  - Azure Database for PostgreSQL
+  - Blob Storage
+- **Local Hosting**
+  - On-premises servers
+  - Cost-effective for small scale
+
+**Web Server**:
+- **Uvicorn**: ASGI server for FastAPI
+- **Gunicorn**: Production WSGI server
+- **Nginx**: Reverse proxy and load balancer
+
+### 11.8 Additional Tools
+
+**Email Service**:
+- **fastapi-mail**: Email sending library
+- **SendGrid/Mailgun**: Email service providers (optional)
+
+**File Upload/Storage**:
+- **Local filesystem**: Development/small scale
+- **AWS S3/Azure Blob**: Production file storage
+
+**Documentation**:
+- **Swagger/OpenAPI**: Auto-generated API docs
+- **Markdown**: Project documentation
+- **Draw.io/Lucidchart**: Diagram creation
+
+**Project Management**:
+- **Jira/Trello**: Task tracking
+- **Confluence**: Documentation
+- **Slack/Teams**: Team communication
+
+### 11.9 Monitoring & Logging (Production)
+
+**Monitoring**:
+- **Sentry**: Error tracking and monitoring
+- **Prometheus**: Metrics collection
+- **Grafana**: Metrics visualization
+
+**Logging**:
+- **Python logging**: Built-in logging
+- **ELK Stack** (Elasticsearch, Logstash, Kibana): Log aggregation
+
+### 11.10 Development Environment Setup
+
+**Operating Systems Supported**:
+- Windows 10/11
+- macOS 12+
+- Linux (Ubuntu 20.04+, Debian, Fedora)
+
+**Minimum System Requirements**:
+- **CPU**: Intel Core i5 or equivalent
+- **RAM**: 8GB (16GB recommended)
+- **Storage**: 20GB free space
+- **Network**: Broadband internet connection
+
+**Development Stack Summary**:
+```
+Frontend:
+- React 18+ with TypeScript
+- Tailwind CSS
+- Axios for API calls
+- React Router for navigation
+
+Backend:
+- FastAPI (Python 3.9+)
+- SQLAlchemy ORM
+- Alembic migrations
+- JWT authentication
+
+Database:
+- PostgreSQL 14+
+
+Deployment:
+- Docker containers
+- Uvicorn/Gunicorn servers
+- Nginx reverse proxy
+```
+
+### 11.11 Technology Justification Summary
+
+| Technology | Alternative Considered | Reason for Choice |
+|-----------|----------------------|-------------------|
+| FastAPI | Django, Flask | Better performance, automatic docs, modern async support |
+| React | Vue.js, Angular | Larger ecosystem, better job market, component reusability |
+| TypeScript | JavaScript | Type safety, better tooling, fewer runtime errors |
+| PostgreSQL | MySQL, MongoDB | Better for complex queries, ACID compliance, free |
+| Tailwind CSS | Bootstrap, Material-UI | Faster development, highly customizable, smaller bundle |
+| JWT | Session-based auth | Stateless, scalable, mobile-friendly |
+| Docker | Manual deployment | Consistency, easier deployment, environment isolation |
+
+---
+
+**END OF PHASE 1 PROPOSAL DOCUMENT**
+
+---
+
+*This document serves as the complete Phase 1 proposal for the Hospital Management System project, addressing all required sections including domain analysis, problem definition, scope, vision, objectives, users, functional and non-functional requirements, use cases, and technology stack.*
+
+*Document Version: 1.0*
+*Date: March 2026*
+*Prepared by: Hospital Management System Development Team*

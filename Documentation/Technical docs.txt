@@ -1,0 +1,472 @@
+# Hospital Management System - Technical Documentation
+
+## 1. System Overview
+
+A multi-hospital management system that enables:
+- Patient registration and account management
+- Medical condition categorization and appointment booking
+- Doctor-patient session management with post-visit documentation
+- Surgery scheduling with consent forms and personnel tracking
+- Administrative oversight across multiple hospitals
+- Comprehensive audit trails and reporting
+
+## 2. Technology Stack
+
+- **Backend**: Python FastAPI
+- **Database**: PostgreSQL
+- **Frontend**: React with TypeScript
+- **Authentication**: JWT tokens
+- **ORM**: SQLAlchemy
+- **Migrations**: Alembic
+
+## 3. User Roles & Permissions
+
+### Patient
+- Create/manage account
+- Select medical conditions from categories
+- Book appointments with doctors
+- View appointment history
+- Sign surgery consent forms
+- Access medical records
+
+### Doctor
+- View scheduled appointments
+- Fill post-consultation forms
+- Prescribe medications
+- Request/schedule surgeries
+- View patient medical history
+- Update availability
+
+### Surgeon
+- All doctor permissions
+- Manage surgery schedules
+- Complete surgery reports
+- Assign surgical team members
+
+### Nurse
+- View assigned patients
+- Update patient vitals
+- Assist in procedures
+- View schedules
+
+### Admin
+- Manage hospital information
+- Add/remove staff members
+- View system-wide analytics
+- Manage departments and specializations
+- Configure medical condition categories
+- Generate reports
+- Manage bed allocation
+- Approve/reject surgery requests
+- Monitor billing and payments
+
+### Super Admin
+- All admin permissions across multiple hospitals
+- Create new hospitals in the system
+- Assign hospital admins
+- System-wide configuration
+
+## 4. Database Schema
+
+### Core Tables
+
+#### hospitals
+- id (PK)
+- name
+- address
+- phone
+- email
+- license_number
+- established_date
+- total_beds
+- available_beds
+- created_at
+- updated_at
+
+#### users
+- id (PK)
+- email (unique)
+- password_hash
+- role (enum: patient, doctor, nurse, admin, super_admin)
+- first_name
+- last_name
+- phone
+- date_of_birth
+- gender
+- address
+- national_id
+- is_active
+- created_at
+- updated_at
+
+#### doctors
+- id (PK)
+- user_id (FK -> users)
+- hospital_id (FK -> hospitals)
+- specialization_id (FK -> specializations)
+- license_number
+- years_of_experience
+- consultation_fee
+- is_surgeon
+- bio
+- created_at
+
+#### patients
+- id (PK)
+- user_id (FK -> users)
+- blood_group
+- height
+- weight
+- emergency_contact_name
+- emergency_contact_phone
+- allergies
+- created_at
+- updated_at
+
+#### specializations
+- id (PK)
+- name (e.g., Cardiology, Neurology)
+- description
+- created_at
+
+#### medical_conditions
+- id (PK)
+- category_id (FK -> condition_categories)
+- name
+- description
+- severity_level (enum: mild, moderate, severe, critical)
+- created_at
+
+#### condition_categories
+- id (PK)
+- name (e.g., Cardiovascular, Respiratory, Neurological)
+- description
+- icon
+- created_at
+
+#### appointments
+- id (PK)
+- patient_id (FK -> patients)
+- doctor_id (FK -> doctors)
+- hospital_id (FK -> hospitals)
+- appointment_date
+- start_time
+- end_time
+- status (enum: scheduled, completed, cancelled, no_show)
+- reason
+- notes
+- created_at
+- updated_at
+
+#### appointment_conditions
+- id (PK)
+- appointment_id (FK -> appointments)
+- condition_id (FK -> medical_conditions)
+
+#### consultations
+- id (PK)
+- appointment_id (FK -> appointments)
+- doctor_id (FK -> doctors)
+- patient_id (FK -> patients)
+- diagnosis
+- symptoms
+- treatment_plan
+- notes
+- follow_up_required
+- follow_up_date
+- created_at
+- updated_at
+
+#### prescriptions
+- id (PK)
+- consultation_id (FK -> consultations)
+- medication_name
+- dosage
+- frequency
+- duration_days
+- instructions
+- created_at
+
+#### surgeries
+- id (PK)
+- patient_id (FK -> patients)
+- surgeon_id (FK -> doctors)
+- hospital_id (FK -> hospitals)
+- surgery_type
+- scheduled_date
+- scheduled_time
+- duration_minutes
+- status (enum: scheduled, in_progress, completed, cancelled)
+- surgery_room
+- notes
+- created_at
+- updated_at
+
+#### surgery_team
+- id (PK)
+- surgery_id (FK -> surgeries)
+- staff_id (FK -> users)
+- role (enum: surgeon, assistant_surgeon, anesthesiologist, nurse, technician)
+- created_at
+
+#### surgery_consent_forms
+- id (PK)
+- surgery_id (FK -> surgeries)
+- patient_signature
+- consent_date
+- risks_explained
+- alternatives_explained
+- patient_questions_answered
+- witness_name
+- witness_signature
+- created_at
+
+#### surgery_reports
+- id (PK)
+- surgery_id (FK -> surgeries)
+- pre_operative_diagnosis
+- post_operative_diagnosis
+- procedure_description
+- complications
+- blood_loss_ml
+- anesthesia_type
+- start_time
+- end_time
+- surgeon_notes
+- created_at
+- updated_at
+
+#### medical_records
+- id (PK)
+- patient_id (FK -> patients)
+- record_type (enum: lab_result, imaging, vaccination, allergy, chronic_condition)
+- title
+- description
+- file_url
+- recorded_date
+- created_by (FK -> users)
+- created_at
+
+#### departments
+- id (PK)
+- hospital_id (FK -> hospitals)
+- name
+- description
+- head_doctor_id (FK -> doctors)
+- created_at
+
+## 5. API Endpoints
+
+### Authentication
+- POST /api/auth/register - Register new user
+- POST /api/auth/login - Login user
+- POST /api/auth/logout - Logout user
+- POST /api/auth/refresh - Refresh JWT token
+- POST /api/auth/forgot-password - Request password reset
+- POST /api/auth/reset-password - Reset password
+
+### Patients
+- GET /api/patients/me - Get current patient profile
+- PUT /api/patients/me - Update patient profile
+- GET /api/patients/{id} - Get patient by ID (doctors/admins)
+- GET /api/patients/{id}/appointments - Get patient appointments
+- GET /api/patients/{id}/medical-history - Get medical history
+- POST /api/patients/{id}/conditions - Add medical condition
+
+### Doctors
+- GET /api/doctors - List all doctors (with filters)
+- GET /api/doctors/{id} - Get doctor details
+- GET /api/doctors/me - Get current doctor profile
+- PUT /api/doctors/me - Update doctor profile
+- GET /api/doctors/me/appointments - Get my appointments
+- GET /api/doctors/me/patients - Get my patients
+- POST /api/doctors/me/availability - Set availability
+
+### Appointments
+- POST /api/appointments - Book new appointment
+- GET /api/appointments/{id} - Get appointment details
+- PUT /api/appointments/{id} - Update appointment
+- DELETE /api/appointments/{id} - Cancel appointment
+- GET /api/appointments/available-slots - Get available time slots
+
+### Consultations
+- POST /api/consultations - Create consultation form
+- GET /api/consultations/{id} - Get consultation details
+- PUT /api/consultations/{id} - Update consultation
+- POST /api/consultations/{id}/prescriptions - Add prescription
+
+### Surgeries
+- POST /api/surgeries - Schedule surgery
+- GET /api/surgeries/{id} - Get surgery details
+- PUT /api/surgeries/{id} - Update surgery
+- POST /api/surgeries/{id}/team - Add team member
+- POST /api/surgeries/{id}/consent - Submit consent form
+- POST /api/surgeries/{id}/report - Submit surgery report
+- GET /api/surgeries/upcoming - Get upcoming surgeries
+
+### Medical Conditions
+- GET /api/conditions/categories - List condition categories
+- GET /api/conditions - List conditions by category
+- GET /api/conditions/{id} - Get condition details
+
+### Hospitals
+- GET /api/hospitals - List all hospitals
+- GET /api/hospitals/{id} - Get hospital details
+- POST /api/hospitals - Create hospital (super admin)
+- PUT /api/hospitals/{id} - Update hospital
+- GET /api/hospitals/{id}/departments - Get departments
+- GET /api/hospitals/{id}/doctors - Get hospital doctors
+
+### Admin
+- GET /api/admin/users - List all users
+- POST /api/admin/users - Create user
+- PUT /api/admin/users/{id} - Update user
+- DELETE /api/admin/users/{id} - Deactivate user
+- GET /api/admin/analytics - Get system analytics
+- GET /api/admin/reports - Generate reports
+- POST /api/admin/departments - Create department
+
+## 6. Security Features
+
+- JWT-based authentication
+- Password hashing with bcrypt
+- Role-based access control (RBAC)
+- Request rate limiting
+- CORS configuration
+- SQL injection prevention via ORM
+- Input validation and sanitization
+- HTTPS enforcement
+- Audit logging for sensitive operations
+
+## 7. Additional Features to Implement
+
+### Phase 1 (Core)
+- User authentication and authorization
+- Patient registration and profile management
+- Doctor profiles and specializations
+- Appointment booking system
+- Basic medical records
+
+### Phase 2 (Enhanced)
+- Consultation forms and prescriptions
+- Surgery scheduling and consent forms
+- Medical condition categorization
+- Multi-hospital support
+- Basic reporting
+
+### Phase 3 (Advanced)
+- Billing and payment integration
+- SMS/Email notifications
+- Lab test integration
+- Pharmacy management
+- Bed allocation system
+- Analytics dashboard
+- Mobile app support
+
+### Phase 4 (Enterprise)
+- Telemedicine integration
+- Insurance claim processing
+- Inventory management
+- Staff shift scheduling
+- Advanced analytics and ML predictions
+
+## 8. Project Structure
+
+```
+hospital-management/
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   ├── security.py
+│   │   │   └── database.py
+│   │   ├── models/
+│   │   │   ├── user.py
+│   │   │   ├── patient.py
+│   │   │   ├── doctor.py
+│   │   │   ├── appointment.py
+│   │   │   ├── surgery.py
+│   │   │   └── ...
+│   │   ├── schemas/
+│   │   │   ├── user.py
+│   │   │   ├── patient.py
+│   │   │   └── ...
+│   │   ├── api/
+│   │   │   ├── deps.py
+│   │   │   ├── v1/
+│   │   │   │   ├── auth.py
+│   │   │   │   ├── patients.py
+│   │   │   │   ├── doctors.py
+│   │   │   │   ├── appointments.py
+│   │   │   │   └── ...
+│   │   ├── crud/
+│   │   │   ├── user.py
+│   │   │   └── ...
+│   │   └── utils/
+│   ├── alembic/
+│   ├── tests/
+│   ├── requirements.txt
+│   └── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── hooks/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   └── App.tsx
+│   ├── package.json
+│   └── tsconfig.json
+└── README.md
+```
+
+## 9. Development Phases
+
+### Week 1-2: Setup & Core Models
+- Project setup
+- Database schema implementation
+- Authentication system
+- User management
+
+### Week 3-4: Patient & Doctor Modules
+- Patient registration and profiles
+- Doctor profiles and specializations
+- Medical condition categories
+- Basic appointment booking
+
+### Week 5-6: Appointments & Consultations
+- Complete appointment system
+- Consultation forms
+- Prescription management
+- Medical records
+
+### Week 7-8: Surgery Module
+- Surgery scheduling
+- Team assignment
+- Consent forms
+- Surgery reports
+
+### Week 9-10: Multi-Hospital & Admin
+- Hospital management
+- Department management
+- Admin dashboard
+- Reporting and analytics
+
+### Week 11-12: Frontend & Testing
+- React frontend implementation
+- Integration testing
+- User acceptance testing
+- Deployment
+
+## 10. Testing Strategy
+
+- Unit tests for business logic
+- Integration tests for API endpoints
+- End-to-end tests for critical workflows
+- Load testing for performance
+- Security testing for vulnerabilities
+
+This documentation provides a comprehensive foundation for building the hospital management system. Ready to start implementation?
