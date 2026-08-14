@@ -216,3 +216,134 @@ The warning is a dependency-level `StarletteDeprecationWarning` stating that `st
 ### Recommended next task
 
 Perform a tightly scoped ORM consistency task: define naming conventions, repair only the already implemented `User`, `Patient`, `Hospitals`, and `Department` model mappings, and add focused metadata/configuration tests. Do not add missing domain models, migrations, seed data, authentication endpoints, or other APIs as part of that task.
+
+## Task 3 - ORM Model Stabilization
+
+### Date
+
+14 August 2026
+
+### Objective
+
+Stabilize only the four ORM models that already contained meaningful implementation, make their metadata internally valid without PostgreSQL access, and preserve the bootable FastAPI boundary from Task 2. Empty placeholders and models described only in design documentation were deliberately excluded.
+
+### ORM conventions chosen
+
+- Python ORM class names are singular PascalCase: `User`, `Patient`, `Hospital`, and `Department`.
+- Implemented model module filenames are lowercase singular: `user.py`, `patient.py`, `hospital.py`, and `department.py`.
+- Database table names are lowercase plural: `users`, `patients`, `hospitals`, and `departments`.
+- Foreign-key strings exactly match registered table and column names.
+- Bidirectional relationships use matching `back_populates` values.
+- One-to-one cardinality is expressed with a unique foreign key and `uselist=False` on the parent relationship.
+- `app.models` is the deliberate registration boundary and exports only models that currently exist.
+- Empty placeholders are not imported into metadata.
+
+### Files created
+
+- `backend/app/models/__init__.py`
+- `backend/tests/test_models.py`
+
+### Files renamed
+
+- `backend/app/models/hospitals.py` to `backend/app/models/hospital.py`
+- `backend/app/models/departments.py` to `backend/app/models/department.py`
+
+Git may display these as delete/add pairs until its rename detection is applied; their logical change is a singular-module rename plus repaired content.
+
+### Files modified
+
+- `backend/app/models/user.py`
+- `backend/app/models/patient.py`
+- `README.md`
+- `Documentation/DEVELOPMENT_PROGRESS.md`
+
+`Documentation/PROJECT_STATUS_REPORT.txt` remains unchanged as the historical audit.
+
+### Model defects discovered
+
+- `User` used the table name `Users`, while `Patient` referenced lowercase `users.id`.
+- `User.patient` used the invalid keyword `useList` instead of `uselist`.
+- `User.doctor` used the invalid keyword `backpopulates` and targeted the unimplemented `Doctor` model.
+- `User.date_of_birth` used `DateTime` for a date-only value.
+- The default SQLAlchemy enum mapping would persist enum member names rather than the documented lowercase role values.
+- `Patient` contained relationships to unimplemented `Appointment`, `Consultation`, `Surgery`, and `MedicalRecord` models.
+- The consultation target was additionally misspelled as `Consulation`.
+- The hospital class was plural (`Hospitals`) while relationships expected singular `Hospital`.
+- Hospital relationships targeted unimplemented doctors, appointments, and surgeries.
+- Hospital `name` was nullable and `license_number` was not required despite both being identifying fields in the current requirements.
+- Updated timestamps had `onupdate` behavior but no initial server default.
+- `Department.head_doctor_id` referenced a nonexistent `doctors` table and its relationship targeted an unimplemented class, preventing foreign-key/mapper resolution.
+- No deliberate model-package registration boundary existed.
+
+### Model defects fixed
+
+- Standardized the user table as `users`, matching `Patient.user_id`.
+- Corrected and verified the bidirectional one-to-one User/Patient mapping.
+- Changed `User.date_of_birth` to SQLAlchemy `Date`.
+- Configured the named `user_role` SQLAlchemy enum to persist the documented lowercase values.
+- Removed all current mapper relationships to unimplemented domain models.
+- Renamed `Hospitals` to `Hospital` and standardized its module filename.
+- Made hospital `name` and `license_number` required; retained uniqueness for the license number.
+- Added initial server defaults to existing `updated_at` fields while preserving update behavior.
+- Standardized the Department module and its Hospital relationship.
+- Made all implemented foreign keys resolvable entirely within current metadata.
+- Added an explicit `app.models` export/registration boundary containing only the four implemented models and `UserRole`.
+
+### Deferred relationships and why
+
+- `User.doctor` is deferred because `Doctor` does not exist.
+- Patient relationships to appointments, consultations, surgeries, and medical records are deferred because none of those model classes exists.
+- Hospital relationships to doctors, appointments, and surgeries are deferred for the same reason.
+- `Department.head_doctor` is deferred because `Doctor` does not exist.
+- `Department.head_doctor_id` is retained as a nullable integer to preserve the intended field, but it intentionally has no foreign-key constraint. Referencing `doctors.id` now would make current metadata invalid and would falsely claim referential integrity. The constraint and relationship must be added when the Doctor table is actually implemented.
+
+### Validation commands
+
+Commands were run from `backend` using the Task 2 virtual environment:
+
+```powershell
+.\.venv\Scripts\python.exe -m black --check app\models\__init__.py app\models\user.py app\models\patient.py app\models\hospital.py app\models\department.py tests\test_models.py
+.\.venv\Scripts\python.exe -m flake8 app\models\__init__.py app\models\user.py app\models\patient.py app\models\hospital.py app\models\department.py tests\test_models.py
+.\.venv\Scripts\python.exe -m pytest -q
+$env:SECRET_KEY='runtime-validation-secret-at-least-32-characters'
+.\.venv\Scripts\python.exe -B -c "from app.main import app; print(app.title)"
+git diff --check
+git status --short --branch
+```
+
+### Test results
+
+```text
+6 passed, 2 warnings
+```
+
+The five new ORM tests verify:
+
+- implemented model imports and successful `configure_mappers()` execution;
+- exactly four registered metadata tables;
+- resolution of every current foreign key within registered metadata;
+- bidirectional one-to-one User/Patient configuration;
+- bidirectional one-to-many Hospital/Department configuration; and
+- persistence of documented lowercase user-role enum values.
+
+The existing health test also passed, and direct `app.main` import still exposes `/health`. Black and Flake8 passed for every Python file touched by Task 3. Git whitespace validation passed.
+
+The two non-failing warnings are pre-existing/infrastructure-level:
+
+- FastAPI/Starlette's installed TestClient emits a deprecation warning about its current HTTPX integration.
+- `database.py` imports `declarative_base` from its SQLAlchemy 1.x compatibility location; SQLAlchemy 2 emits `MovedIn20Warning`. This file was not changed because modernizing database infrastructure was outside the model-only scope.
+
+### Remaining known issues
+
+- `Department.head_doctor_id` has no database-enforced relationship until Doctor is implemented.
+- Empty placeholder files remain for admin, appointment, consultation, doctor, medical conditions, and surgery concepts; none is registered as an ORM model.
+- Both `surgery.py` and `surgeries.py` remain empty and should be resolved only when surgery modeling is explicitly scoped.
+- No Alembic migrations or real database tables exist.
+- No persistence CRUD/service layer or domain API exists.
+- Model field lengths, validation rules, deletion cascades, and hospital-scoped department uniqueness require explicit business decisions in future tasks.
+- The SQLAlchemy `declarative_base` deprecation warning and TestClient dependency warning remain.
+- The Task 3 changes remain uncommitted for review.
+
+### Recommended next task
+
+Establish a narrowly scoped Alembic migration baseline for only the four stabilized models, including review of the temporary unconstrained `head_doctor_id`. Do not combine migration setup with new models, seed data, authentication, CRUD services, domain APIs, frontend work, or Docker.

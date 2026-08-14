@@ -11,7 +11,7 @@ The files in `Documentation/` describe intended requirements and designs. They d
 The project is in the initial backend scaffolding and data-model stage. A minimal FastAPI process can now start and expose a health endpoint, but there is no complete domain workflow.
 
 - **Implemented:** a minimal FastAPI application, CORS middleware, `GET /health`, a focused health smoke test, baseline settings, synchronous SQLAlchemy engine/session setup, password hashing and verification helpers, JWT access-token creation, a user-role enumeration, and partial SQLAlchemy models.
-- **Partially implemented:** user, patient, hospital, and department persistence definitions. These models still contain unresolved naming, relationship, and foreign-key problems.
+- **Partially implemented:** stabilized metadata mappings for users, patients, hospitals, and departments. Database migrations and persistence workflows do not yet exist.
 - **Planned only:** the API, complete authentication and authorization, remaining domain models, migrations, frontend, reporting, notifications, deployment configuration, and the other workflows described in the design documents.
 
 ## Technology stack
@@ -25,7 +25,7 @@ Confirmed by the current backend code and dependency file:
 - python-jose for JWT creation
 - Passlib and bcrypt for password hashing
 - Alembic dependency (not configured)
-- pytest, pytest-asyncio, and HTTPX dependencies (no tests yet)
+- pytest, pytest-asyncio, and HTTPX with focused health and ORM metadata tests
 - Black, Flake8, and mypy development dependencies
 
 Dependencies are currently unpinned, so the repository does not establish exact installed versions. React, TypeScript, Tailwind CSS, and related frontend tools are planned but not present.
@@ -39,12 +39,13 @@ Dependencies are currently unpinned, so the repository does not establish exact 
 │   ├── requirements.txt    # Python dependencies
 │   └── app/
 │       ├── core/           # Settings, database session, security helpers
-│       ├── models/         # Partial SQLAlchemy models and placeholders
+│       ├── models/         # Four registered ORM models and placeholders
 │       ├── schemas/        # Currently empty schema placeholders
 │       ├── __init__.py     # Side-effect-free package boundary
 │       └── main.py         # Minimal FastAPI app and health endpoint
 │   └── tests/
-│       └── test_health.py  # Focused application smoke test
+│       ├── test_health.py  # Focused application smoke test
+│       └── test_models.py  # ORM metadata and relationship tests
 └── Documentation/
     ├── PROJECT_STATUS_REPORT.txt
     ├── phase1_proposal.txt
@@ -52,7 +53,7 @@ Dependencies are currently unpinned, so the repository does not establish exact 
     └── DEVELOPMENT_PROGRESS.md
 ```
 
-There is currently no `frontend/`, API route package, CRUD layer, Alembic setup, test suite, Docker configuration, or seed data.
+There is currently no `frontend/`, API route package, CRUD layer, Alembic setup, broad domain test suite, Docker configuration, or seed data.
 
 ## Prerequisites
 
@@ -126,10 +127,11 @@ Never commit `backend/.env`. The example file contains placeholders only and rem
 - `backend/app/core/security.py`: access-token creation and password hash/check helpers.
 - `backend/app/main.py`: FastAPI application, configured CORS middleware, versioned documentation URLs, and process-only health endpoint.
 - `backend/tests/test_health.py`: focused health endpoint smoke test.
-- `backend/app/models/user.py`: partial user model and role enumeration.
-- `backend/app/models/patient.py`: partial patient model.
-- `backend/app/models/hospitals.py`: partial hospital model.
-- `backend/app/models/departments.py`: partial department model.
+- `backend/app/models/user.py`: user model and role enumeration.
+- `backend/app/models/patient.py`: patient model with a one-to-one user relationship.
+- `backend/app/models/hospital.py`: hospital model with departments.
+- `backend/app/models/department.py`: department model associated with a hospital.
+- `backend/app/models/__init__.py`: deliberate registration boundary for implemented models only.
 
 These components are foundational and do not constitute a working application.
 
@@ -137,8 +139,8 @@ These components are foundational and do not constitute a working application.
 
 - The only implemented HTTP endpoint is `GET /health`; no domain API exists.
 - `backend/app/__init__.py` deliberately does not import domain models because that layer is incomplete.
-- Several model relationship targets do not exist.
-- Existing models contain table-name, relationship-name, and foreign-key inconsistencies.
+- Relationships to planned models are deferred until those models are implemented.
+- `Department.head_doctor_id` is intentionally not a foreign key until the planned `Doctor` model exists.
 - Pydantic schema files are empty.
 - There is no authentication/login workflow or authorization enforcement.
 - There are no migrations, tests, frontend, containers, or deployment instructions.
@@ -172,4 +174,4 @@ All items above remain planned unless explicitly listed as implemented or partia
 5. Append task results and remaining issues to `Documentation/DEVELOPMENT_PROGRESS.md`.
 6. Review working-tree changes before committing; commits and pushes are performed only when explicitly requested.
 
-The recommended next implementation task is a minimal bootable FastAPI application and health endpoint while carefully isolating or correcting unresolved model imports. Authentication and domain APIs should follow in separately reviewed tasks.
+The recommended next task is a separately scoped persistence step, such as adding the next explicitly approved model set or establishing migrations for the stabilized models. Authentication and domain APIs should follow in separately reviewed tasks.
